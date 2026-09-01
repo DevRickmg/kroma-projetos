@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 240" role="img" aria-label="Kroma Projetos">
+  <defs>
+    <linearGradient id="kromaGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="55%" stop-color="#7B5CFF"/>
+      <stop offset="100%" stop-color="#FF007F"/>
+    </linearGradient>
+    <filter id="kromaGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Marca: hexágono cristal low-poly -->
+  <g filter="url(#kromaGlow)" fill="none" stroke="url(#kromaGrad)" stroke-width="4"
+     stroke-linecap="round" stroke-linejoin="round">
+    <!-- contorno -->
+    <polygon points="120,30 197.94,75 197.94,165 120,210 42.06,165 42.06,75" stroke-width="5"/>
+    <!-- facetas internas -->
+    <path d="M120,30 L120,210 M197.94,75 L42.06,165 M42.06,75 L197.94,165"/>
+    <path d="M120,30 L197.94,165 M197.94,75 L120,210 M197.94,165 L42.06,165
+             M120,210 L42.06,75 M42.06,165 L120,30 M42.06,75 L197.94,75" opacity="0.85"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g font-family="Inter, 'Helvetica Neue', Arial, sans-serif">
+    <text x="250" y="128" font-size="76" font-weight="700" letter-spacing="2">
+      <tspan fill="#00E5FF">K</tspan><tspan fill="#F5F7FA">ROMA</tspan>
+    </text>
+    <text x="252" y="168" font-size="27.5" font-weight="500" letter-spacing="17.5" fill="#8A94A6">PROJETOS</text>
+  </g>
+</svg>

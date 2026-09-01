@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 240" role="img" aria-label="Kroma Projetos">
+  <defs>
+    <linearGradient id="kromaGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00B8CC"/>
+      <stop offset="55%" stop-color="#6A4CE0"/>
+      <stop offset="100%" stop-color="#E60072"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Marca: hexágono cristal low-poly (versão fundo claro, sem glow) -->
+  <g fill="none" stroke="url(#kromaGrad)" stroke-width="4"
+     stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="120,30 197.94,75 197.94,165 120,210 42.06,165 42.06,75" stroke-width="5"/>
+    <path d="M120,30 L120,210 M197.94,75 L42.06,165 M42.06,75 L197.94,165"/>
+    <path d="M120,30 L197.94,165 M197.94,75 L120,210 M197.94,165 L42.06,165
+             M120,210 L42.06,75 M42.06,165 L120,30 M42.06,75 L197.94,75" opacity="0.85"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g font-family="Inter, 'Helvetica Neue', Arial, sans-serif">
+    <text x="250" y="128" font-size="76" font-weight="700" letter-spacing="2">
+      <tspan fill="#00A5BD">K</tspan><tspan fill="#0D0F12">ROMA</tspan>
+    </text>
+    <text x="252" y="168" font-size="27.5" font-weight="500" letter-spacing="17.5" fill="#5A6472">PROJETOS</text>
+  </g>
+</svg>

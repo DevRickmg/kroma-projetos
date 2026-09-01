@@ -4,8 +4,8 @@ Sua empresa roda em cima desse arquivo. Aqui ficam as regras de operação
 do MazyOS — como o Claude lê o contexto, aprende com correções, mantém
 tudo atualizado e cria skills novas conforme a operação evolui.
 
-Esse arquivo é editável. Quando o `/instalar` rodar, ele complementa o
-final dessa página com as regras específicas do seu negócio.
+Esse arquivo é editável. As regras específicas do negócio estão na
+seção **"Kroma Projetos — operação"** no final dessa página.
 
 ---
 
@@ -113,3 +113,77 @@ Quando o usuário pedir skill nova:
 4. Se a skill precisar de arquivos de apoio (templates, exemplos),
    criar dentro da pasta da skill
 5. Seguir o fluxo da skill-creator nativa do Claude Code
+
+---
+
+# Kroma Projetos — operação
+
+> Perfil **freelancer**: uma pessoa vendendo projetos de tecnologia
+> fechados. O sistema gira em torno de captar, entregar e cobrar —
+> um projeto de cada vez, sem enrolar na produção.
+
+## O que é esse workspace
+
+Operação solo da Kroma Projetos. Aqui ficam todos os clientes,
+briefings, entregas, propostas e o conteúdo da própria marca.
+
+**Estrutura de pastas:**
+- `_memoria/` — quem é a Kroma, como fala, foco atual
+- `identidade/` — marca da Kroma aplicada em site, proposta e conteúdo
+- `clientes/` — uma subpasta por cliente, autossuficiente (criar quando entrar o primeiro)
+- `propostas/` — propostas em rascunho ou enviadas (antes de fechar)
+- `marketing/` — conteúdo da própria Kroma (Insta, portfolio, etc.)
+- `saidas/` — emails e documentos pontuais
+- `dados/` — arquivos a analisar
+- `tarefas.md` — pipeline, prazos, próximos passos, lembretes da semana
+
+## Quem sou
+
+Sozinho na Kroma Projetos (marca pessoal). Monto a estrutura de
+tecnologia completa de um negócio — site, automação de WhatsApp, sistemas — e
+entrego pronto de uma vez.
+
+## Meu serviço
+
+- Sites institucionais / landing pages
+- Robô de atendimento no WhatsApp (automação)
+- Estrutura digital pro negócio rodar no automático (sistemas, CRM, integrações)
+
+Cobrança: **valor único fechado, sem recorrência**. Nunca propor modelo
+de mensalidade — é o oposto do posicionamento da marca.
+
+## Clientes ativos
+
+Nenhum registrado ainda. Quando entrar o primeiro, criar
+`clientes/<Nome>/` com `briefing.md`. O `/atualizar` mantém essa lista
+sincronizada com as pastas em `clientes/`.
+
+## Como trabalho
+
+Um projeto de tecnologia por vez, do briefing à entrega final. O gargalo
+hoje é a criação de site (demora, erro, retrabalho) — ao trabalhar em
+site, priorizar padronização: base reutilizável, componentes prontos e
+checklist de QA antes de mandar pro cliente. Ver `_memoria/estrategia.md`.
+
+## Tom de voz
+
+Direto, curto, sem marketês. Ver `_memoria/preferencias.md` para a lista
+completa do que evitar.
+
+## Regras do sistema
+
+- Cliente novo → criar pasta `clientes/<Nome>/` com `briefing.md`
+- Proposta antes de fechar → `propostas/<Nome>.html`
+- Proposta de cliente fechado → `clientes/<Nome>/proposta.html`
+- Qualquer peça visual (site, proposta, carrossel) → ler `identidade/design-guide.md` antes
+- Nunca sugerir cobrança recorrente / mensalidade pro cliente final
+- Lembretes e tarefas da semana → `tarefas.md` (candidato a virar skill via `/mapear-rotinas`)
+
+## Ferramentas conectadas
+
+- [ ] Notion
+- [ ] Gmail
+- [ ] Google Calendar
+- [ ] Stripe / cobrança
+
+*(Marcar conforme for instalando os MCPs)*
