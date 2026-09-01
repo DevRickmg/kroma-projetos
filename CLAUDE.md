@@ -184,7 +184,7 @@ completa do que evitar.
 - Repo oficial da Kroma: `https://github.com/DevRickmg/kroma-projetos` (private)
 - O git dessa máquina autentica como **DevRickmg**, mesmo que os commits apareçam assinados como `RickMS16` — as duas contas são do mesmo dono; usar sempre DevRickmg pra push
 - O `mazzeoia/MazyOS` era só o template de origem, não é o repo de trabalho
-- `git push` costuma ser bloqueado no modo automático do Claude — rodar no terminal ou liberar `Bash(git push:*)` via `/permissions`
+- `git push` já está liberado no modo automático (regra `Bash(git push:*)` em `.claude/settings.json`). O `git commit` ainda pede confirmação — liberar com `Bash(git commit:*)` se quiser o `/salvar` 100% automático
 
 ## Ferramentas conectadas
 
