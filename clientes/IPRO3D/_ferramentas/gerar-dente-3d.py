@@ -29,7 +29,8 @@ SUPER_N = 2.35                             # 2 = circulo, >2 = secao mais quadra
 NROOT, RTOP, ROOT_L = 3, 0.16, 0.80        # n. de raizes · topo (dentro da coroa) · comprimento
 D0, SPLAY, RR0 = 0.235, 0.075, 0.335       # afastamento do eixo · abertura · raio do tubo
 T_MIX, T_FULL = 0.58, 0.90                 # onde a secao comeca/termina de virar lobada
-S_ROOT = 0.30                              # de onde os tubos passam a ser desenhados
+S_ROOT = 0.43                              # de onde os tubos passam a ser desenhados
+                                           # (bate com Y_JOIN: acima disso a coroa ja cobre)
 
 # perfil circular da coroa: tc=0 no topo, tc=1 em Y_JOIN
 RC = [(0,0),(.033,.44),(.075,.68),(.125,.84),(.185,.94),(.27,1.0),

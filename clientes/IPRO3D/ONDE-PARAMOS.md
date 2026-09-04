@@ -24,11 +24,15 @@ Site: [`site/index.html`](site/index.html) · Landing do e-book: [`site/ebook.ht
 acessos) → dois públicos → exames (com filtro) → zigzag → **e-book** → a clínica +
 Dr. Ronald → depoimentos (carrossel) → FAQ → localização + mapa → faixa de CTA → rodapé.
 
-**Dente 3D wireframe da logo** — script paramétrico: uma superfície só, a coroa é
-lofted do topo oclusal até dentro da região radicular e a seção transversal vai
-virando a união dos 3 cilindros das raízes; dali pra baixo os tubos assumem, afinam
-e fecham em ponta. Profundidade por opacidade, gradiente roxo→laranja. No hero
-(flutuando + balanço 3D + sombra), no logo do header e no do rodapé.
+**Dente 3D** — uma superfície só: a coroa é lofted do topo oclusal até dentro da
+região radicular e a seção transversal vai virando a união dos 3 cilindros das
+raízes; dali pra baixo os tubos assumem, afinam e fecham em ponta.
+
+- **No hero**: malha de verdade num `<canvas>`, rotacionada e projetada a cada
+  frame, sobre painel roxo escuro. Gira sozinho e dá pra arrastar. Sem JS ou sem
+  canvas, cai no SVG estático.
+- **Nos logos** (header, rodapé, header da `ebook.html`): SVG estático, gerado
+  pelo mesmo perfil, com densidade menor.
 
 **Seção do e-book** — livro 3D em CSS (capa + lombo + miolo + sombra), flutuando e
 girando. Formulário inline e a capa clica pra landing dedicada.
@@ -47,6 +51,23 @@ em 390px, zero foto de banco (só SVG autoral).
 ---
 
 ## Resolvido nesta sessão
+
+- [x] **Dente do hero virou 3D de verdade.** Duas rodadas de SVG não convenceram:
+      linha fina e clara num painel branco lê como gaiola de arame, não como
+      escaneamento. Agora é `<canvas>` com a malha rotacionada e projetada a cada
+      frame — gira sozinho, dá pra arrastar, e o painel do hero virou roxo escuro
+      (`#3d2b78 → #1c1442`) com gradiente laranja no topo e violeta nas raízes,
+      que é o que faz o dente saltar.
+      - Sem dependência externa **de propósito**: o Ronald/eu abrimos o
+        `index.html` do disco, e `<script type="module">` puxando CDN não carrega
+        em `file://` (CORS). Canvas 2D também garante o screenshot em headless.
+      - Fallback: sem JS ou sem canvas, o SVG estático continua lá (regradeado
+        pro fundo escuro).
+      - Pausa fora da tela (`IntersectionObserver`) e com a aba escondida;
+        `prefers-reduced-motion` deixa pose fixa, mas ainda arrastável.
+      - Malha menor abaixo de 720px.
+- [x] **Tarjas flutuantes no celular** — as 3 cobriam o dente no painel pequeno.
+      Menores, nos cantos, e a do meio some abaixo de 720px.
 
 - [x] **Dente refeito** — a versão anterior era um barril com 4 pernas soltas
       penduradas embaixo (coroa cilíndrica + raízes tubulares separadas, com uma
@@ -131,7 +152,8 @@ pedida (aí a viewport é real). O `screenshot-secao.py` continua valendo pra de
 |---|---|
 | `gerar-dente-3d.py` | Gera a malha wireframe do dente |
 | `injetar-dente.py` | Regera a malha e injeta nos SVGs do site (hero + logos) |
-| `preview-dente.py` | Renderiza o dente sozinho num PNG pra conferir a forma |
+| `preview-dente.py` | Renderiza o dente SVG sozinho num PNG pra conferir a forma |
+| `preview-canvas.py` | Renderiza só o canvas 3D isolado (lê o script do próprio `index.html`) |
 | `screenshot-secao.py` | Isola uma seção no topo e fotografa (desktop) |
 | `screenshot-mobile.py` | Fotografa com viewport mobile real, via iframe |
 
