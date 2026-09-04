@@ -1,6 +1,7 @@
 # Site novo — IPRO3D
 
 `index.html` — site completo, arquivo único, sem dependência de build.
+`ebook.html` — landing dedicada do e-book (pra rodar anúncio direto pro material).
 Abre com dois cliques no navegador. Só usa CDN de fonte (Google Fonts) e o iframe do Google Maps.
 
 ## Base de estrutura
@@ -48,15 +49,20 @@ autoridade do responsável técnico visível.
 - Sem foto de banco: tudo ilustração SVG autoral, então nada quebra offline
 - Formulário monta a mensagem e abre o WhatsApp (não precisa de backend)
 
+## Ligado ao site atual
+
+- Acessos do IDOC: `ipro3d.com.br/acesse-dentista/` e `/acesse-paciente/`
+  (botões na seção IDOC, no header e no rodapé)
+- Facebook `facebook.com/ipro3d` · YouTube canal `UCjJIRo56W7X0Qk_RhVU5f0A`
+  · Instagram `@ipro3dpinda`
+
 ## Antes de publicar — confirmar com o Ronald
 
 - [ ] **Nota do Google (4,9)** — está estimada, trocar pela real ou remover
 - [ ] **Depoimentos** — os 4 são de exemplo, substituir por reais
 - [ ] **Números**: 23 anos (2003), +180 mil exames, +300 dentistas, 10 na equipe — vieram do site atual, confirmar
 - [ ] **CEP** — 12410-030 ou 12410-732
-- [ ] **Links do IDOC** — hoje os botões vão pro WhatsApp; apontar pros logins reais
 - [ ] **FAQ** — respostas escritas com base no padrão do setor; validar preparo, prazo e convênio
-- [ ] Facebook e YouTube no rodapé estão com `#`, colar as URLs
 - [ ] Se tiver foto boa da clínica/equipe, dá pra trocar uma das ilustrações
 
 ## Identidade
@@ -64,3 +70,23 @@ autoridade do responsável técnico visível.
 Marca da IPRO3D modernizada — **não** a identidade da Kroma.
 Roxo `#2a2472` / `#14103c`, laranja `#f5851f` só em CTA e acento, pêssego `#ffe1c4`,
 creme `#fdf5ec`. Fontes: Plus Jakarta Sans (títulos) + Inter (corpo).
+
+## Landing do e-book (`ebook.html`)
+
+Reaproveita todo o CSS e o livro 3D do `index.html` — é gerada por
+`_ferramentas/` a partir do site, então **se mudar os tokens no index, regerar**.
+
+Os dois formulários de e-book têm `name` diferente (`ebook` na seção do site,
+`ebook-lp` na landing) pra dar pra separar de onde veio o lead.
+
+O e-book em si (PDF) ainda não existe. Confirmar com o Ronald antes de publicar.
+
+## Como testar
+
+- Desktop: `python _ferramentas/screenshot-secao.py ebook exames:1440x1250`
+- Mobile: `python _ferramentas/screenshot-mobile.py top:390x1500`
+
+⚠️ O Chrome não aceita janela abaixo de ~500px. Screenshot direto com
+`--window-size=390` renderiza a 500 e corta o lado direito — dá falso positivo de
+overflow. Use o `screenshot-mobile.py`, que roda a página dentro de um iframe da
+largura pedida.
