@@ -152,11 +152,24 @@ entrego pronto de uma vez.
 Cobrança: **valor único fechado, sem recorrência**. Nunca propor modelo
 de mensalidade — é o oposto do posicionamento da marca.
 
-## Clientes ativos
+## Clientes e prospecção
 
-Nenhum registrado ainda. Quando entrar o primeiro, criar
-`clientes/<Nome>/` com `briefing.md`. O `/atualizar` mantém essa lista
-sincronizada com as pastas em `clientes/`.
+Distinguir os dois estágios. **Prospecção** = ainda não fechou, o trabalho
+é pra conquistar. **Ativo** = contratado. Nunca tratar prospecção como
+trabalho já contratado (não falar de cobrança, prazo de entrega ou próximos
+passos como se estivesse fechado).
+
+### Em prospecção
+
+- **IPRO3D** (Dr. Ronald Lima) — radiologia odontológica, Pindamonhangaba/SP.
+  Site atual desatualizado (parado em 2021). Pasta: `clientes/IPRO3D/`.
+  Site novo pronto pra apresentar. Estado e pendências em
+  `clientes/IPRO3D/ONDE-PARAMOS.md`.
+
+### Clientes ativos
+
+Nenhum ainda. Quando um prospect fechar, mover pra cá e avisar o usuário.
+O `/atualizar` mantém essa lista sincronizada com as pastas em `clientes/`.
 
 ## Como trabalho
 

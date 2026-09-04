@@ -19,3 +19,15 @@
 - Modelo de cobrança: valor único fechado, sem recorrência. Esse é o principal diferencial de posicionamento contra agências.
 - Tagline da marca: "Tecnologia definitiva. Projetos fechados."
 - Domínio: kromaprojetos.com.br
+
+## Clientes
+
+**Em prospecção** (ainda não fecharam):
+
+- **IPRO3D** — Dr. Ronald Lima, radiologista (CRO-SP 66226). Clínica de
+  radiologia odontológica em Pindamonhangaba/SP desde 2003, atende paciente
+  e dentista parceiro. Abordagem: redesign do site (o atual é WordPress de
+  agência, parado desde 2021). Trabalho feito antes de fechar, pra usar como
+  argumento de venda.
+
+**Ativos:** nenhum ainda.

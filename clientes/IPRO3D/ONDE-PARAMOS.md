@@ -138,5 +138,5 @@ mini `(40,6,9,4,6,32,16,21,10,.38,.12,2,.94)`
 
 ## Pendência de organização
 
-A IPRO3D ainda não está registrada como cliente ativo em `_memoria/empresa.md`
-nem no `CLAUDE.md` da raiz.
+A IPRO3D já está registrada como **prospecção** em `_memoria/empresa.md`
+e no `CLAUDE.md` da raiz. Quando fechar, mover pra "Clientes ativos".
