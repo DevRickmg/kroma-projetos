@@ -24,9 +24,11 @@ Site: [`site/index.html`](site/index.html) · Landing do e-book: [`site/ebook.ht
 acessos) → dois públicos → exames (com filtro) → zigzag → **e-book** → a clínica +
 Dr. Ronald → depoimentos (carrossel) → FAQ → localização + mapa → faixa de CTA → rodapé.
 
-**Dente 3D wireframe da logo** — script paramétrico (coroa lofted + 4 raízes tubulares,
-profundidade por opacidade, gradiente roxo→laranja). No hero (flutuando + balanço 3D +
-sombra), no logo do header e no do rodapé.
+**Dente 3D wireframe da logo** — script paramétrico: uma superfície só, a coroa é
+lofted do topo oclusal até dentro da região radicular e a seção transversal vai
+virando a união dos 3 cilindros das raízes; dali pra baixo os tubos assumem, afinam
+e fecham em ponta. Profundidade por opacidade, gradiente roxo→laranja. No hero
+(flutuando + balanço 3D + sombra), no logo do header e no do rodapé.
 
 **Seção do e-book** — livro 3D em CSS (capa + lombo + miolo + sombra), flutuando e
 girando. Formulário inline e a capa clica pra landing dedicada.
@@ -45,6 +47,21 @@ em 390px, zero foto de banco (só SVG autoral).
 ---
 
 ## Resolvido nesta sessão
+
+- [x] **Dente refeito** — a versão anterior era um barril com 4 pernas soltas
+      penduradas embaixo (coroa cilíndrica + raízes tubulares separadas, com uma
+      emenda horizontal dura no colo). Reescrevi o gerador: agora é uma superfície
+      contínua, a seção da coroa se deforma de circular pra lobada (união dos 3
+      cilindros radiculares) entre `T_MIX` e `T_FULL`, e as raízes só passam a ser
+      desenhadas a partir de `S_ROOT`. As 3 raízes giram junto com a câmera
+      (`root_base`) pra projetarem simétricas — sem isso um lado ficava mais estreito
+      que a coroa e a emenda voltava a aparecer. Cor mantida (roxo→laranja do site).
+- [x] **Estrela no ápice** — a modulação de cúspide mexia no `y` mesmo com raio 0,
+      o que virava uma estrela de 4 pontas no polo. Agora o deslocamento é
+      multiplicado pelo raio normalizado.
+- [x] **Logo do header da `ebook.html`** — o header daquela página é `--indigo-900`
+      fixo, e o dente saía com o gradiente roxo (sumia no fundo). Trocado pro traço
+      branco, igual ao do rodapé.
 
 - [x] **Lombo do livro** — a configuração original já estava certa; ele só era
       invisível porque era azul-marinho sobre fundo azul-marinho. Testei as 4
@@ -113,13 +130,15 @@ pedida (aí a viewport é real). O `screenshot-secao.py` continua valendo pra de
 | Arquivo | Pra que serve |
 |---|---|
 | `gerar-dente-3d.py` | Gera a malha wireframe do dente |
+| `injetar-dente.py` | Regera a malha e injeta nos SVGs do site (hero + logos) |
+| `preview-dente.py` | Renderiza o dente sozinho num PNG pra conferir a forma |
 | `screenshot-secao.py` | Isola uma seção no topo e fotografa (desktop) |
 | `screenshot-mobile.py` | Fotografa com viewport mobile real, via iframe |
 
-Densidades do dente em uso:
-hero `(260,15,26,9,10,76,36,22,10,.22,.34,1,.92)` ·
-logo `(40,8,12,5,7,40,20,21,10,.32,.075,2,.94)` ·
-mini `(40,6,9,4,6,32,16,21,10,.38,.12,2,.94)`
+Densidades do dente: estão no topo do `injetar-dente.py` (`HERO`, `LOGO`, `MINI`).
+Mexeu na geometria? Roda `python _ferramentas/injetar-dente.py` que ele refaz os
+4 SVGs (hero + logo do header + rodapé do `index.html`, logo da `ebook.html`).
+O `MINI` (traço branco) é escolhido sozinho quando o `<g>` tem `stroke="#fff"`.
 
 ---
 

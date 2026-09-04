@@ -24,3 +24,8 @@ node_modules/
 # Drop zone do usuário (só o README vai versionado)
 dados/*
 !dados/README.md
+
+# Screenshots e HTMLs temporarios das ferramentas de preview
+clientes/*/_ferramentas/_*.html
+clientes/*/_ferramentas/p_*.png
+clientes/*/_ferramentas/s_*.png
