@@ -29,8 +29,9 @@ autoridade do responsável técnico visível.
 - Barra de progresso de scroll no topo
 - Header sticky que ganha fundo e sombra ao rolar
 - Reveal em cascata (IntersectionObserver, delay escalonado por irmão)
-- Dente 3D no hero: malha de verdade num `<canvas>`, girando (arrasta pra girar
-  na mão). Sem JS/canvas cai no SVG estático de fallback.
+- Dente 3D no hero: dente branco sólido em WebGL, flutuando e girando no
+  sentido anti-horário. Arrasta com o mouse ou o dedo pra girar na mão.
+  Sem JS ou sem WebGL cai no SVG de silhueta.
 - 3 chips flutuantes no hero com boias em tempos diferentes
 - Grifo pêssego animado no título
 - Blobs de fundo em movimento lento

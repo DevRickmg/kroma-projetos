@@ -34,7 +34,7 @@ def shot(section, out, w=390, h=900, src=SRC):
     io.open(page, 'w', encoding='utf-8').write(s)
     io.open(os.path.join(SP, '_m_wrap.html'), 'w', encoding='utf-8').write(
         WRAP % ('_m_page.html', w, h))
-    subprocess.run([CHROME, '--headless', '--disable-gpu', '--hide-scrollbars',
+    subprocess.run([CHROME, '--headless', '--enable-unsafe-swiftshader', '--hide-scrollbars',
                     '--force-device-scale-factor=1', '--virtual-time-budget=6000',
                     '--allow-file-access-from-files',
                     '--screenshot=' + SP + '/' + out,

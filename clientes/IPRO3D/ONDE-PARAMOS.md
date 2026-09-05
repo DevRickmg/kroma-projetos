@@ -24,15 +24,16 @@ Site: [`site/index.html`](site/index.html) · Landing do e-book: [`site/ebook.ht
 acessos) → dois públicos → exames (com filtro) → zigzag → **e-book** → a clínica +
 Dr. Ronald → depoimentos (carrossel) → FAQ → localização + mapa → faixa de CTA → rodapé.
 
-**Dente 3D** — uma superfície só: a coroa é lofted do topo oclusal até dentro da
-região radicular e a seção transversal vai virando a união dos 3 cilindros das
-raízes; dali pra baixo os tubos assumem, afinam e fecham em ponta.
+**Dente 3D** — **branco sólido**, formato tradicional: coroa com mesa oclusal e
+4 cúspides, colo, e **4 raízes** que nascem fundidas e descem afinando até a
+ponta. A seção da coroa vai virando a união dos 4 cilindros radiculares e dali
+pra baixo os tubos assumem.
 
-- **No hero**: malha de verdade num `<canvas>`, rotacionada e projetada a cada
-  frame, sobre painel roxo escuro. Gira sozinho e dá pra arrastar. Sem JS ou sem
-  canvas, cai no SVG estático.
-- **Nos logos** (header, rodapé, header da `ebook.html`): SVG estático, gerado
-  pelo mesmo perfil, com densidade menor.
+- **No hero**: WebGL cru (sem biblioteca), sobre painel roxo escuro. Flutua,
+  gira sozinho no sentido anti-horário e dá pra girar arrastando — mouse ou
+  dedo. Sem JS ou sem WebGL, cai no SVG de silhueta.
+- **Nos logos** (header, rodapé, header da `ebook.html`): SVG de silhueta chapada
+  gerado pelo mesmo perfil — gradiente da marca no fundo claro, branco no escuro.
 
 **Seção do e-book** — livro 3D em CSS (capa + lombo + miolo + sombra), flutuando e
 girando. Formulário inline e a capa clica pra landing dedicada.
@@ -51,6 +52,32 @@ em 390px, zero foto de banco (só SVG autoral).
 ---
 
 ## Resolvido nesta sessão
+
+- [x] **Dente refeito: branco e sólido, sem wireframe.** As versões de linha
+      (SVG e depois canvas) não eram o que o Ronald/eu queríamos — o pedido era
+      dente branco maciço, formato tradicional, com 4 pontinhas embaixo.
+      Geometria refeita (4 raízes em vez de 3, coroa mais alta, cintura no colo)
+      e o hero agora é **WebGL cru**, com sombreamento suave, luz alta pela
+      esquerda, sombra puxada pro violeta do painel e uma borda quente que separa
+      o dente do fundo.
+      - Flutua, gira no sentido **anti-horário** e responde a arrastar (mouse e
+        toque). `touch-action:pan-y` no canvas pra não travar o scroll do celular.
+      - Sem WebGL → o `<svg>` de silhueta que já está no HTML fica no lugar.
+      - Os logos também viraram silhueta chapada: no tamanho de 34px o wireframe
+        virava um cestinho ilegível.
+- [x] **Duas armadilhas que custaram caro no sombreado** (anotadas porque não são
+      óbvias):
+      1. O perfil interpolava com **smoothstep entre pontos de controle**, que
+         chega com derivada zero em cada ponto — ou seja, um anel achatado em
+         cada um. Em wireframe não aparece; no sólido virou onda. Trocado por
+         Catmull-Rom + uma média móvel leve pra tirar a quina de curvatura.
+      2. Os tubos das raízes começavam rente à saia da coroa, e como a borda da
+         coroa cai exatamente em cima da superfície dos tubos, abria fresta pro
+         fundo. Agora os tubos sobem bem pra dentro da coroa (`S_JOIN` pequeno) e
+         a última volta da coroa encolhe 22% pra ficar enterrada.
+- [x] **Sombreamento plano não serve** — a primeira tentativa foi Canvas 2D com
+      uma cor por face; num objeto branco liso vira bola de discoteca. Só com
+      normal por vértice (WebGL) fica liso.
 
 - [x] **Dente do hero virou 3D de verdade.** Duas rodadas de SVG não convenceram:
       linha fina e clara num painel branco lê como gaiola de arame, não como
@@ -152,15 +179,20 @@ pedida (aí a viewport é real). O `screenshot-secao.py` continua valendo pra de
 |---|---|
 | `gerar-dente-3d.py` | Gera a malha wireframe do dente |
 | `injetar-dente.py` | Regera a malha e injeta nos SVGs do site (hero + logos) |
-| `preview-dente.py` | Renderiza o dente SVG sozinho num PNG pra conferir a forma |
-| `preview-canvas.py` | Renderiza só o canvas 3D isolado (lê o script do próprio `index.html`) |
+| `preview-dente.py` | Renderiza a silhueta SVG em 4 poses, pra conferir a forma |
+| `preview-canvas.py` | Renderiza só o dente WebGL isolado (lê o script do próprio `index.html`) |
 | `screenshot-secao.py` | Isola uma seção no topo e fotografa (desktop) |
 | `screenshot-mobile.py` | Fotografa com viewport mobile real, via iframe |
 
-Densidades do dente: estão no topo do `injetar-dente.py` (`HERO`, `LOGO`, `MINI`).
-Mexeu na geometria? Roda `python _ferramentas/injetar-dente.py` que ele refaz os
-4 SVGs (hero + logo do header + rodapé do `index.html`, logo da `ebook.html`).
-O `MINI` (traço branco) é escolhido sozinho quando o `<g>` tem `stroke="#fff"`.
+**Atenção: a geometria mora em dois lugares** — `_ferramentas/gerar-dente-3d.py`
+(SVGs) e o bloco `dente 3D no canvas` dentro do `site/index.html` (WebGL). Mexeu
+no perfil, mexe nos dois, senão o fallback fica diferente do hero. Depois roda
+`python _ferramentas/injetar-dente.py` pra refazer os 4 SVGs. A versão branca é
+escolhida sozinha quando o `<svg>` já estava em branco (rodapé e header da
+landing).
+
+Screenshot com WebGL precisa de `--enable-unsafe-swiftshader` no Chrome headless
+(já está nos scripts). Com `--disable-gpu` puro o canvas sai vazio.
 
 ---
 

@@ -32,8 +32,9 @@ page = """<!doctype html><meta charset=utf-8>
 tmp = os.path.join(SP, '_cv.html').replace(chr(92), '/')
 io.open(tmp, 'w', encoding='utf-8').write(page)
 out = os.path.join(SP, 'p_canvas.png').replace(chr(92), '/')
-subprocess.run([CHROME, '--headless', '--disable-gpu', '--hide-scrollbars',
+subprocess.run([CHROME, '--headless', '--hide-scrollbars',
                 '--force-device-scale-factor=2', '--virtual-time-budget=4000',
+                '--enable-unsafe-swiftshader',
                 '--screenshot=' + out, '--window-size=%d,%d' % (SIZE, SIZE),
                 'file:///' + tmp], capture_output=True)
 print('p_canvas.png', os.path.getsize(out) if os.path.exists(out) else 'FALHOU')

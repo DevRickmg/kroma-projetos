@@ -19,7 +19,7 @@ def shot(section, out, w=1440, h=900):
     s = s.replace('</body>', TPL.replace('KEEP', section))
     tmp = os.path.join(SP, '_iso.html')
     io.open(tmp, 'w', encoding='utf-8').write(s)
-    subprocess.run([CHROME, '--headless', '--disable-gpu', '--hide-scrollbars',
+    subprocess.run([CHROME, '--headless', '--enable-unsafe-swiftshader', '--hide-scrollbars',
                     '--force-device-scale-factor=1', '--virtual-time-budget=5000',
                     '--screenshot=' + os.path.join(SP, out).replace(chr(92), '/'),
                     '--window-size=%d,%d' % (w, h),
