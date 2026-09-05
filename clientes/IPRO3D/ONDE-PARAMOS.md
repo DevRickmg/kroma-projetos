@@ -24,16 +24,15 @@ Site: [`site/index.html`](site/index.html) · Landing do e-book: [`site/ebook.ht
 acessos) → dois públicos → exames (com filtro) → zigzag → **e-book** → a clínica +
 Dr. Ronald → depoimentos (carrossel) → FAQ → localização + mapa → faixa de CTA → rodapé.
 
-**Dente 3D** — **branco sólido**, formato tradicional: coroa com mesa oclusal e
-4 cúspides, colo, e **4 raízes** que nascem fundidas e descem afinando até a
-ponta. A seção da coroa vai virando a união dos 4 cilindros radiculares e dali
-pra baixo os tubos assumem.
+**Dente do hero** — **embed do Sketchfab**: modelo "Tooth", do Skazok
+(`d2b3c8f5b4194f59b04b5e7542ccbe58`). Flutua sobre o painel roxo escuro, gira
+sozinho e dá pra girar arrastando. Fundo transparente (`transparent=1`), então
+o painel aparece atrás.
 
-- **No hero**: WebGL cru (sem biblioteca), sobre painel roxo escuro. Flutua,
-  gira sozinho no sentido anti-horário e dá pra girar arrastando — mouse ou
-  dedo. Sem JS ou sem WebGL, cai no SVG de silhueta.
-- **Nos logos** (header, rodapé, header da `ebook.html`): SVG de silhueta chapada
-  gerado pelo mesmo perfil — gradiente da marca no fundo claro, branco no escuro.
+**Dente dos logos** (header, rodapé, header da `ebook.html`) — esse continua
+sendo o nosso: silhueta chapada gerada por `_ferramentas/gerar-dente-3d.py`
+(coroa com 4 cúspides + 4 raízes), gradiente da marca no fundo claro e branco
+no escuro. **Não mexer** — o pedido foi trocar só o do hero.
 
 **Seção do e-book** — livro 3D em CSS (capa + lombo + miolo + sombra), flutuando e
 girando. Formulário inline e a capa clica pra landing dedicada.
@@ -52,6 +51,30 @@ em 390px, zero foto de banco (só SVG autoral).
 ---
 
 ## Resolvido nesta sessão
+
+- [x] **Dente do hero trocado pelo modelo do Sketchfab.** Saiu o dente que eu
+      modelei em WebGL, entrou o embed do "Tooth" do Skazok. O bloco WebGL foi
+      removido (virou código morto) e o `index.html` caiu de 225 KB pra 124 KB.
+      O dente dos logos ficou como estava.
+
+### O que veio junto com o embed (ler antes de mostrar pro Ronald)
+
+- **Licença OK**: Sketchfab **Standard** — uso comercial liberado, sem exigência
+  de crédito. Por isso não coloquei o `<p>` de atribuição que vem no snippet;
+  o próprio player já mostra "Tooth by Skazok".
+- **A barra "Tooth by Skazok" e o botão de compartilhar não somem.** Mandei
+  `ui_infos=0` e `ui_watermark=0` e o Sketchfab ignora — remover exige plano
+  pago. Ou seja: tem marca de terceiro no hero de uma peça de prospecção.
+- **Modelo pesado**: 220 mil faces. O painel mostra "Loading 3D model" nos
+  primeiros segundos, e em 3G isso demora.
+- **Depende de internet e do Sketchfab estar no ar.** Se cair, o painel fica
+  vazio — não tem fallback, o SVG do hero saiu junto.
+- **Não consegui conferir o render aqui.** O Chrome headless usa WebGL por
+  software (swiftshader) e o modelo não termina de carregar nem com 90 s de
+  orçamento. Confirmei a forma pela thumbnail da API (molar branco, 2 raízes).
+  **Abrir no navegador de verdade pra validar.**
+- No celular pus uma capa transparente por cima do iframe: sem ela, arrastar o
+  dedo em cima do dente gira o modelo em vez de rolar a página.
 
 - [x] **Dente refeito: branco e sólido, sem wireframe.** As versões de linha
       (SVG e depois canvas) não eram o que o Ronald/eu queríamos — o pedido era
@@ -180,14 +203,12 @@ pedida (aí a viewport é real). O `screenshot-secao.py` continua valendo pra de
 | `gerar-dente-3d.py` | Gera a malha wireframe do dente |
 | `injetar-dente.py` | Regera a malha e injeta nos SVGs do site (hero + logos) |
 | `preview-dente.py` | Renderiza a silhueta SVG em 4 poses, pra conferir a forma |
-| `preview-canvas.py` | Renderiza só o dente WebGL isolado (lê o script do próprio `index.html`) |
 | `screenshot-secao.py` | Isola uma seção no topo e fotografa (desktop) |
 | `screenshot-mobile.py` | Fotografa com viewport mobile real, via iframe |
 
-**Atenção: a geometria mora em dois lugares** — `_ferramentas/gerar-dente-3d.py`
-(SVGs) e o bloco `dente 3D no canvas` dentro do `site/index.html` (WebGL). Mexeu
-no perfil, mexe nos dois, senão o fallback fica diferente do hero. Depois roda
-`python _ferramentas/injetar-dente.py` pra refazer os 4 SVGs. A versão branca é
+`gerar-dente-3d.py` + `injetar-dente.py` agora servem **só aos logos** (o hero é
+o iframe do Sketchfab). Mexeu no perfil, roda
+`python _ferramentas/injetar-dente.py` pra refazer as 3 marcas. A versão branca é
 escolhida sozinha quando o `<svg>` já estava em branco (rodapé e header da
 landing).
 
