@@ -35,8 +35,10 @@ sendo o nosso: silhueta chapada gerada por `_ferramentas/gerar-dente-3d.py`
 no escuro. **Não mexer** — o pedido foi trocar só o do hero.
 
 **Seção do e-book** — livro 3D em CSS com **as 6 faces**: capa, contracapa,
-lombada, corte da frente, cabeça e pé. Flutua, balança sozinho e **dá pra girar
-arrastando** (mouse e dedo), igual ao dente. O dente da capa é o sólido, gerado
+lombada, corte da frente, cabeça e pé. Fica girado mostrando o **bloco de
+páginas branco** (é ele que denuncia a espessura; mostrando a lombada o livro
+sumia, roxo sobre roxo). Flutua, balança sozinho e **dá pra girar arrastando**
+(mouse e dedo), igual ao dente. O dente da capa é o sólido, gerado
 pelo `injetar-dente.py` (classe `book-mark`). Formulário inline e a capa clica
 pra landing dedicada.
 
@@ -61,7 +63,24 @@ em 390px, zero foto de banco (só SVG autoral).
       rente à capa e vinco na dobra da lombada. Gira arrastando, e o dente da
       capa virou o sólido no lugar do wireframe.
 
-### Três coisas de CSS 3D que custaram tempo (anotar)
+### O motivo real do livro parecer uma placa (a armadilha principal)
+
+**`opacity` animada no mesmo elemento que tem `transform-style:preserve-3d`
+achata o 3D.** A animação de entrada (`bookIn`) vivia no `.book`, e como ela
+mexe em `opacity`, o elemento vira grupo de composição — o navegador ignora o
+`preserve-3d` e projeta tudo num plano só. Resultado: as faces do miolo
+simplesmente não eram pintadas (forcei elas em vermelho puro pra confirmar:
+não apareciam), e o livro ficava uma placa fina flutuando, por mais que eu
+mexesse em ângulo, espessura e cor.
+
+Como ficou: `.book-wrap` segura a entrada, a flutuação **e a perspectiva**
+(perspectiva não atravessa elemento achatado), e o `.book` fica só com o giro.
+
+Sintoma pra reconhecer da próxima vez: `getComputedStyle` diz
+`transform-style: preserve-3d`, o `getBoundingClientRect` das faces mostra que
+elas estão na posição certa, e mesmo assim nada aparece na tela.
+
+### Outras três de CSS 3D que custaram tempo (anotar)
 
 1. **`backface-visibility:hidden` nas faces do miolo faz elas sumirem.** Lombada,
    corte, cabeça e pé são painéis girados 90° a partir da borda — a normal deles
