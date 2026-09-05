@@ -34,8 +34,11 @@ sendo o nosso: silhueta chapada gerada por `_ferramentas/gerar-dente-3d.py`
 (coroa com 4 cúspides + 4 raízes), gradiente da marca no fundo claro e branco
 no escuro. **Não mexer** — o pedido foi trocar só o do hero.
 
-**Seção do e-book** — livro 3D em CSS (capa + lombo + miolo + sombra), flutuando e
-girando. Formulário inline e a capa clica pra landing dedicada.
+**Seção do e-book** — livro 3D em CSS com **as 6 faces**: capa, contracapa,
+lombada, corte da frente, cabeça e pé. Flutua, balança sozinho e **dá pra girar
+arrastando** (mouse e dedo), igual ao dente. O dente da capa é o sólido, gerado
+pelo `injetar-dente.py` (classe `book-mark`). Formulário inline e a capa clica
+pra landing dedicada.
 
 **Landing `ebook.html`** — página separada pra rodar anúncio direto pro material.
 Reaproveita os tokens e o livro 3D do site. Formulário com nome, e-mail, WhatsApp e
@@ -51,6 +54,30 @@ em 390px, zero foto de banco (só SVG autoral).
 ---
 
 ## Resolvido nesta sessão
+
+- [x] **Livro do e-book refeito.** Antes tinha só capa + lombada + um corte, e
+      lia como um cartão inclinado. Agora são as 6 faces de um livro de verdade
+      (capa, contracapa, lombada, corte, cabeça e pé), com o miolo listrado quase
+      rente à capa e vinco na dobra da lombada. Gira arrastando, e o dente da
+      capa virou o sólido no lugar do wireframe.
+
+### Três coisas de CSS 3D que custaram tempo (anotar)
+
+1. **`backface-visibility:hidden` nas faces do miolo faz elas sumirem.** Lombada,
+   corte, cabeça e pé são painéis girados 90° a partir da borda — a normal deles
+   acaba apontando pra **dentro** do livro. Com backface escondida, some tudo e
+   o livro vira um cartão chapado. Só as duas capas podem ter backface escondida.
+2. **`rotateX` positivo olha o livro de cima** (mostra a cabeça), não de baixo.
+   É o contrário do que parece. Descobri renderizando as faces com cores de
+   debug — vale repetir o truque se mexer nisso de novo.
+3. **A lombada sumia por contraste, não por geometria.** Ela era `#3b34a0` sobre
+   uma seção `#1d1856`: escuro sobre escuro. Clareei pra `#544bd4` / `#ff9433` e
+   pus um vinco escuro entre lombada e capa. Antes de mexer em transform,
+   conferir se o problema não é só cor.
+
+- [x] **Bug de escopo**: o JS do livro usava a variável `reduce`, que só existe
+      no `index.html`. Na `ebook.html` estourava `ReferenceError` e o livro
+      ficava parado. O bloco agora lê `prefers-reduced-motion` por conta própria.
 
 - [x] **Dente do hero trocado pelo modelo do Sketchfab.** Saiu o dente que eu
       modelei em WebGL, entrou o embed do "Tooth" do Skazok. O bloco WebGL foi

@@ -96,7 +96,7 @@ def union_r(th, s):
             best = max(best, d*math.cos(a) + math.sqrt(disc))
     return best if best > 1e-4 else rr
 
-def crown_pt(th, tc):
+def crown_pt(th, tc, tuck=0.22):
     y  = y_crown(tc)
     rn = prof(RC, tc)
     r  = rn*CROWN_R
@@ -109,8 +109,10 @@ def crown_pt(th, tc):
     if w > 0:
         r = r*(1-w) + union_r(th, s_at(y))*w
     # a ultima volta some pra dentro do bloco das raizes: se ela parasse em
-    # cima da superficie dos tubos, a borda aberta aparecia como um anel
-    r *= 1 - 0.22*smoothstep(0.94, 1.0, tc)
+    # cima da superficie dos tubos, a borda aberta aparecia como um anel.
+    # So faz sentido no solido sombreado — na silhueta (tuck=0) esse recuo
+    # abriria um degrau no colo, que vira farpa no contorno.
+    r *= 1 - tuck*smoothstep(0.94, 1.0, tc)
     return (r*math.cos(th), y, ASPECT*r*math.sin(th))
 
 def root_pt(k, ph, s):
@@ -122,7 +124,7 @@ def root_pt(k, ph, s):
 
 
 # --- malha -----------------------------------------------------------------
-def mesh(cr=26, seg=56, rr_=12, segr=26):
+def mesh(cr=26, seg=56, rr_=12, segr=26, tuck=0.22):
     """Vertices + quads, com winding pra fora (normal aponta pra fora)."""
     V, F = [], []
     S_JOIN = s_at(Y_JOIN)
@@ -151,7 +153,7 @@ def mesh(cr=26, seg=56, rr_=12, segr=26):
                 F.append((a,b,c,d) if n[0]*out[0]+n[1]*out[1]+n[2]*out[2] >= 0
                          else (a,d,c,b))
 
-    grid(lambda i,j: crown_pt(2*math.pi*j/seg, i/cr), cr, seg,
+    grid(lambda i,j: crown_pt(2*math.pi*j/seg, i/cr, tuck), cr, seg,
          lambda c: (0.0, c[1], 0.0))
     for k in range(NROOT):
         thk = BASE + k*(2*math.pi/NROOT)
@@ -196,3 +198,177 @@ def build_flat(size=260, cr=26, seg=56, rr_=12, segr=26,
         out.append("M" + "L".join((f+" "+f) % (cxo+q[0]*S, cyo+q[1]*S)
                                   for q in (pa,pb,pc,pd)) + "Z")
     return '<path d="%s"/>' % "".join(out)
+
+
+# --- silhueta limpa --------------------------------------------------------
+# `build_flat` cospe uma face por quad: fecha o bloco, mas sao milhares de
+# subcaminhos e cada costura aparece como linha. Aqui a gente rasteriza a
+# malha projetada, pega o contorno da mancha e devolve UM caminho suave —
+# a mesma pose, sem linha nenhuma, do tamanho de um icone.
+
+def _raster(P, F, N, ss):
+    """Mancha da malha projetada num grid N*ss, devolvida como cobertura NxN."""
+    M = N*ss
+    g = bytearray(M*M)
+    for f in F:
+        q = [P[i] for i in f]
+        ymin = max(0, int(min(p[1] for p in q)))
+        ymax = min(M-1, int(max(p[1] for p in q)) + 1)
+        for y in range(ymin, ymax+1):
+            yc, xs, n = y + .5, [], len(q)
+            for k in range(n):
+                x1, y1 = q[k][0], q[k][1]
+                x2, y2 = q[(k+1) % n][0], q[(k+1) % n][1]
+                if (y1 <= yc < y2) or (y2 <= yc < y1):
+                    xs.append(x1 + (yc-y1)*(x2-x1)/(y2-y1))
+            if len(xs) < 2: continue
+            xs.sort()
+            row = y*M
+            for k in range(0, len(xs)-1, 2):
+                a = max(0, int(xs[k] - .5) + 1)
+                b = min(M-1, int(xs[k+1] - .5))
+                if b >= a: g[row+a:row+b+1] = b'\x01' * (b-a+1)
+    # media dos ss x ss subpixels -> cobertura 0..1, o que suaviza o contorno
+    inv = 1.0/(ss*ss)
+    cov = [[0.0]*N for _ in range(N)]
+    for j in range(N):
+        rows = [g[(j*ss+dy)*M:(j*ss+dy+1)*M] for dy in range(ss)]
+        cj = cov[j]
+        for i in range(N):
+            x0 = i*ss
+            cj[i] = sum(sum(r[x0:x0+ss]) for r in rows)*inv
+    return cov
+
+
+def _contours(cov, N, iso=.5):
+    """Marching squares com interpolacao: devolve os anéis fechados."""
+    def ip(xa, ya, va, xb, yb, vb):
+        t = 0.5 if abs(vb-va) < 1e-9 else (iso-va)/(vb-va)
+        return (xa + (xb-xa)*t, ya + (yb-ya)*t)
+
+    segs = []
+    for j in range(N-1):
+        for i in range(N-1):
+            v0, v1 = cov[j][i], cov[j][i+1]
+            v2, v3 = cov[j+1][i+1], cov[j+1][i]
+            c = (1 if v0 > iso else 0) | (2 if v1 > iso else 0) \
+                | (4 if v2 > iso else 0) | (8 if v3 > iso else 0)
+            if c == 0 or c == 15: continue
+            T = ip(i, j, v0, i+1, j, v1)          # aresta de cima
+            R = ip(i+1, j, v1, i+1, j+1, v2)      # direita
+            B = ip(i+1, j+1, v2, i, j+1, v3)      # baixo
+            L = ip(i, j+1, v3, i, j, v0)          # esquerda
+            # winding: o interior (>iso) fica sempre a esquerda do segmento
+            if   c in (1, 14):  segs.append((L, T) if c == 1 else (T, L))
+            elif c in (2, 13):  segs.append((T, R) if c == 2 else (R, T))
+            elif c in (4, 11):  segs.append((R, B) if c == 4 else (B, R))
+            elif c in (8, 7):   segs.append((B, L) if c == 8 else (L, B))
+            elif c == 3:        segs.append((L, R))
+            elif c == 12:       segs.append((R, L))
+            elif c == 6:        segs.append((T, B))
+            elif c == 9:        segs.append((B, T))
+            elif c == 5:        segs.append((L, T)); segs.append((R, B))
+            elif c == 10:       segs.append((T, R)); segs.append((B, L))
+
+    key = lambda p: (round(p[0], 6), round(p[1], 6))
+    nxt = {}
+    for a, b in segs: nxt.setdefault(key(a), []).append((a, b))
+    loops, used = [], set()
+    for a0, b0 in segs:
+        if id((a0, b0)) in used: continue
+        cur, loop, guard = (a0, b0), [a0], 0
+        while guard < len(segs) + 5:
+            guard += 1
+            if id(cur) in used: break
+            used.add(id(cur))
+            loop.append(cur[1])
+            cand = nxt.get(key(cur[1]))
+            if not cand: break
+            nx = None
+            for s in cand:
+                if id(s) not in used: nx = s; break
+            if nx is None: break
+            if key(nx[1]) == key(loop[0]) and len(loop) > 3:
+                used.add(id(nx)); break
+            cur = nx
+        if len(loop) > 8: loops.append(loop)
+    return loops
+
+
+def _area(pts):
+    a = 0.0
+    for i in range(len(pts)):
+        x1, y1 = pts[i]; x2, y2 = pts[(i+1) % len(pts)]
+        a += x1*y2 - x2*y1
+    return a/2.0
+
+
+def _smooth(pts, passes, w=.5):
+    """Laplaciano no anel fechado: tira o serrilhado do marching squares."""
+    for _ in range(passes):
+        n = len(pts)
+        pts = [((1-w)*pts[i][0] + w*(pts[i-1][0] + pts[(i+1) % n][0])/2,
+                (1-w)*pts[i][1] + w*(pts[i-1][1] + pts[(i+1) % n][1])/2)
+               for i in range(n)]
+    return pts
+
+
+def _rdp(pts, eps):
+    """Douglas-Peucker: joga fora ponto que a reta ja explica."""
+    if len(pts) < 3: return pts
+    x0, y0 = pts[0]; x1, y1 = pts[-1]
+    dx, dy = x1-x0, y1-y0
+    L = math.hypot(dx, dy)
+    imax, dmax = 0, -1.0
+    for i in range(1, len(pts)-1):
+        px, py = pts[i]
+        d = (abs(dy*px - dx*py + x1*y0 - y1*x0)/L if L > 1e-12
+             else math.hypot(px-x0, py-y0))
+        if d > dmax: imax, dmax = i, d
+    if dmax <= eps: return [pts[0], pts[-1]]
+    return _rdp(pts[:imax+1], eps)[:-1] + _rdp(pts[imax:], eps)
+
+
+def _bezier(pts, f, t=1/6.):
+    """Catmull-Rom -> cubicas: o contorno sai curvo, nao poligonal."""
+    n = len(pts)
+    d = ["M" + (f+" "+f) % pts[0]]
+    for i in range(n):
+        p0, p1 = pts[i-1], pts[i]
+        p2, p3 = pts[(i+1) % n], pts[(i+2) % n]
+        c1 = (p1[0] + (p2[0]-p0[0])*t, p1[1] + (p2[1]-p0[1])*t)
+        c2 = (p2[0] - (p3[0]-p1[0])*t, p2[1] - (p3[1]-p1[1])*t)
+        d.append(("C" + (f+" "+f+" "+f+" "+f+" "+f+" "+f))
+                 % (c1[0], c1[1], c2[0], c2[1], p2[0], p2[1]))
+    return "".join(d) + "Z"
+
+
+def build_outline(size=40, phi=26, pitch=13, scale=.94, grid=180, ss=4,
+                  smooth=3, eps=.35, prec=2, mesh_args=None):
+    """Silhueta do dente 3D como UM caminho fechado e liso.
+
+    Mesma pose do modelo do hero, so que chapada: da pra pintar de uma cor
+    (ou com gradiente) e funciona bem de 24px pra cima.
+    """
+    V, F = mesh(**(mesh_args or dict(cr=34, seg=88, rr_=18, segr=36, tuck=0.0)))
+    ph, pt = math.radians(phi), math.radians(pitch)
+    P = [project(v, ph, pt) for v in V]
+
+    xs = [p[0] for p in P]; ys = [p[1] for p in P]
+    x0, x1 = min(xs), max(xs); y0, y1 = min(ys), max(ys)
+    S = grid*scale/max(x1-x0, y1-y0)
+    ox = grid/2. - (x0+x1)/2*S; oy = grid/2. - (y0+y1)/2*S
+    Pg = [((ox + p[0]*S)*ss, (oy + p[1]*S)*ss) for p in P]
+
+    loops = _contours(_raster(Pg, F, grid, ss), grid)
+    if not loops: raise RuntimeError('silhueta vazia')
+    loops.sort(key=lambda L: abs(_area(L)), reverse=True)
+    outer = loops[0]
+    if _area(outer) < 0: outer = outer[::-1]     # sentido horario, fill nonzero
+
+    outer = _rdp(_smooth(outer, smooth), eps)
+    if len(outer) > 2 and outer[0] == outer[-1]: outer = outer[:-1]
+
+    k = size/float(grid)
+    outer = [(x*k, y*k) for x, y in outer]
+    return '<path d="%s"/>' % _bezier(outer, "%."+str(prec)+"f")
