@@ -62,9 +62,20 @@ em 390px, zero foto de banco (só SVG autoral).
 - **Licença OK**: Sketchfab **Standard** — uso comercial liberado, sem exigência
   de crédito. Por isso não coloquei o `<p>` de atribuição que vem no snippet;
   o próprio player já mostra "Tooth by Skazok".
-- **A barra "Tooth by Skazok" e o botão de compartilhar não somem.** Mandei
-  `ui_infos=0` e `ui_watermark=0` e o Sketchfab ignora — remover exige plano
-  pago. Ou seja: tem marca de terceiro no hero de uma peça de prospecção.
+- **Os ícones do Sketchfab não somem por parâmetro.** `ui_controls=0` e
+  `ui_watermark=0` são ignorados em conta grátis. Resolvido no CSS: a moldura
+  do iframe estoura **96px em cima e embaixo** e o excedente é cortado
+  (`overflow:hidden` no `.tooth-embed`). Funciona porque os ícones ficam todos
+  em duas faixas — compartilhar em cima, marca + barra de controles embaixo.
+  **Só na vertical**: cortar de lado exigiria esticar tanto que cortaria o
+  próprio dente (o logo do Sketchfab chega a ~85px da borda esquerda).
+  Medida em px fixos de propósito — os ícones têm tamanho fixo, não
+  acompanham o tamanho do painel.
+- **Isso esconde a marca do Sketchfab, que o embed grátis exige mostrar.**
+  Não é ilegal e a licença do modelo (Standard) permite uso comercial, mas
+  contraria os termos de embed deles. O caminho limpo é plano pago **ou**
+  baixar o `.glb` (o modelo é downloadable e a licença permite) e hospedar no
+  nosso servidor — aí não tem UI de terceiro nenhuma, nem dependência externa.
 - **Modelo pesado**: 220 mil faces. O painel mostra "Loading 3D model" nos
   primeiros segundos, e em 3G isso demora.
 - **Depende de internet e do Sketchfab estar no ar.** Se cair, o painel fica
@@ -75,6 +86,12 @@ em 390px, zero foto de banco (só SVG autoral).
   **Abrir no navegador de verdade pra validar.**
 - No celular pus uma capa transparente por cima do iframe: sem ela, arrastar o
   dedo em cima do dente gira o modelo em vez de rolar a página.
+- **Armadilha que o recorte destapou**: pôr o iframe em `position:absolute`
+  colapsou o hero pra 0x0 abaixo de 1000px. O `.hero-vis` tem
+  `margin-inline:auto`, que impede o `stretch` da coluna do grid — então a
+  largura vinha do conteúdo, e tirando o iframe do fluxo não sobrava conteúdo
+  nenhum (painel e tarjas já eram `absolute`). Resolvido com `width:100%`
+  explícito no `.hero-vis` do mobile.
 
 - [x] **Dente refeito: branco e sólido, sem wireframe.** As versões de linha
       (SVG e depois canvas) não eram o que o Ronald/eu queríamos — o pedido era

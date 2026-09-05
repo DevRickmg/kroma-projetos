@@ -176,9 +176,18 @@ nav.main a:hover::after{right:0}
 .hero-vis .panel::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(70% 70% at 50% 45%,#000,transparent)}.hero-vis .panel::after{content:"";position:absolute;inset:0;background:radial-gradient(58% 46% at 50% 42%,rgba(245,133,31,.16),transparent 70%)}
 @keyframes float{0%,100%{transform:translateY(-8px)}50%{transform:translateY(8px)}}
 .tooth-stage{position:relative;width:86%;aspect-ratio:1;display:grid;place-items:center;perspective:1300px}
-.tooth-embed{position:relative;width:100%;height:100%;
+.tooth-embed{position:relative;width:100%;height:100%;overflow:hidden;border-radius:20px;
   animation:toothIn 1.1s .15s var(--ease) both, toothBob 7s 1s ease-in-out infinite}
-.tooth-embed iframe{width:100%;height:100%;border:0;display:block;background:transparent}
+/* o Sketchfab so tira a barra de controles e a marca em plano pago, e ignora
+   ui_controls=0. Os icones ficam todos em duas faixas: compartilhar em cima,
+   marca + barra de controles embaixo. Entao a moldura do iframe estoura 96px
+   em cima e embaixo e o excedente e cortado. So na vertical de proposito:
+   cortar de lado obrigaria a esticar tanto que cortaria o proprio dente.
+   Medida em px fixos porque os icones tem tamanho fixo, nao acompanham o
+   tamanho do painel. */
+.tooth-embed iframe{position:absolute;left:0;top:-96px;
+  width:100%;height:calc(100% + 192px);
+  border:0;display:block;background:transparent}
 .tooth-3d{position:relative;width:100%;height:auto;transform-style:preserve-3d;opacity:0;
   animation:toothIn 1.1s .15s var(--ease) forwards, toothBob 8s 1s ease-in-out infinite, toothSpin 18s 1s ease-in-out infinite}
 @keyframes toothIn{from{opacity:0;scale:.9}to{opacity:1;scale:1}}
@@ -412,7 +421,9 @@ footer nav a:hover{color:#fff;transform:translateX(3px)}
   .hero-grid,.mech,.aud,.zig,.clin,.faq,.local{grid-template-columns:1fr}
   .sect-head{grid-template-columns:1fr;align-items:start}
   .zig.rev .art-panel{order:0}.zig.rev .txt{order:0}
-  .hero-vis{max-width:440px;margin-inline:auto;aspect-ratio:1/1}
+  /* width explicito: com margin-inline:auto a caixa nao estica pela coluna,
+     e o conteudo dela e todo posicionado — sem isso colapsa pra 0x0 */
+  .hero-vis{width:100%;max-width:440px;margin-inline:auto;aspect-ratio:1/1}
   .ex-grid{grid-template-columns:1fr 1fr}
   .proof{grid-template-columns:1fr 1fr}
   .f-top{grid-template-columns:1fr 1fr}
