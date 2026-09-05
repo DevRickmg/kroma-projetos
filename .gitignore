@@ -27,5 +27,6 @@ dados/*
 
 # Screenshots e HTMLs temporarios das ferramentas de preview
 clientes/*/_ferramentas/_*.html
+clientes/*/_ferramentas/_*.py
 clientes/*/_ferramentas/p_*.png
 clientes/*/_ferramentas/s_*.png
