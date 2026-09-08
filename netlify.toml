@@ -1,0 +1,20 @@
+# Netlify — publicação do site da IPRO3D
+#
+# ATENÇÃO ao `publish`: sem ele o Netlify serviria a RAIZ do repositório, que é
+# o workspace inteiro da Kroma — briefings, `dados-negocio.md` com a tabela de
+# preços, `_memoria/`. Tudo isso viraria URL pública. Aqui só a pasta do site
+# vai pro ar.
+#
+# Não tem build: são dois HTML estáticos, o Netlify só copia a pasta.
+
+[build]
+  publish = "clientes/IPRO3D/site"
+
+# O site é peça de prospecção e é uma cópia do ipro3d.com.br, que existe e está
+# no ar. Deixar o Google indexar isso criaria conteúdo duplicado e confusão
+# com o site do cliente. Quando o Ronald aprovar e for pro domínio dele,
+# APAGAR este bloco.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
