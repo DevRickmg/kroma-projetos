@@ -63,6 +63,38 @@ em 390px, zero foto de banco (só SVG autoral).
 
 ## Resolvido nesta sessão
 
+- [x] **Ícones dos 6 cards de exame + "Sem gesso" redesenhados, mais
+      representativos.** Perguntei antes de mexer: os cards já tinham ilustração
+      (não estavam em branco), a política do site é "zero foto de banco" desde a
+      primeira sessão — a pergunta era se trocava por fotos ou refazia os SVG.
+      O Ronald escolheu refazer os SVG (manter o estilo, deixar mais claro).
+      Trocados:
+      - **Panorâmica digital**: os dois blobs laranja soltos viraram uma fileira
+        de dentinhos ao longo de um arco — lê como "filme de raio-x com a arcada".
+      - **Periapical**: reticula de foco + filminho com um dente dentro — "exame
+        pontual, dente a dente".
+      - **Cone Beam**: virou uma pilha de fatias elípticas (uma em laranja no
+        meio) — convenção padrão de tomografia/CT, bem mais claro que o
+        hexágono abstrato de antes.
+      - **Documentação ortodôntica**: duas fotos empilhadas com um ícone de
+        "foto" dentro + selo de check — já estava razoável, só reforcei o
+        "foto" pra não ler como documento genérico.
+      - **Documentação Invisalign**: era um blob que lia como rosto/queixo.
+        Virou uma arcada (a mesma "fileira de dentinhos" do ícone 1, reusada
+        pra dar família visual) com um arco tracejado por cima (o alinhador
+        transparente) e um brilho no topo.
+      - **Escaneamento intraoral**: a cúpula/luminária que não lia como nada
+        virou a arcada + uma caneta de scanner apontando dois feixes laranja
+        pra dentro dela — a mesma arcada de novo, pra reforçar a família.
+      - **"Sem gesso"** (seção zigzag): a plataforma isométrica + losango virou
+        arcada + caneta de scanner → seta tracejada → um modelo impresso (base
+        com dentinhos em cima), contando a história "escaneou, saiu o
+        modelo" que o texto já promete. **"Sem papel" não mexi** — já estava
+        claro (celular com o resultado na tela + botão de baixar).
+      Processo: iterei num laboratório isolado (`_ferramentas/_icon_lab.py`,
+      renderizando lado a lado e comparando) antes de injetar no `index.html`
+      de verdade, pra não ficar testando ideia feia direto no site.
+
 - [x] **Topbar removida** (a faixa `#191652` com "Aberto hoje · horário ·
       endereço · telefone" acima do header). Pedido do Ronald — achou poluído.
       Endereço e telefone já apareciam no rodapé e na seção `#local`, nada foi
