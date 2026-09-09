@@ -27,13 +27,13 @@ mapa → faixa de CTA → rodapé. **Sem topbar** — a faixa azul escura com ho
 endereço/telefone acima do header foi removida (o Ronald achou poluída); esses dados
 já apareciam no rodapé e na seção de localização, então nada se perdeu.
 
-**Dente do hero** — **WebGL nosso** (de novo — foi embed do Sketchfab por uma
-sessão inteira, revertido; ver "Resolvido nesta sessão" de hoje pro motivo).
-`<canvas id="tooth3d">`, branco sólido, coroa + 4 raízes, sombreamento por
-normal de vértice. Flutua sobre o painel roxo escuro, gira sozinho no sentido
-anti-horário e dá pra girar arrastando (mouse e touch). Sem WebGL cai no
-`<svg class="tooth-3d">` de fallback que já está no HTML. Zero dependência
-externa, zero internet necessária, zero UI de terceiro.
+**Dente do hero** — **embed do Sketchfab**: modelo "Tooth", do Skazok
+(`d2b3c8f5b4194f59b04b5e7542ccbe58`). Flutua sobre o painel roxo escuro, gira
+sozinho e dá pra girar arrastando. Fundo transparente (`transparent=1`), então
+o painel aparece atrás. **O Ronald prefere esse visual ao nosso WebGL — não
+trocar de novo sem perguntar antes** (ver "Resolvido nesta sessão" de hoje).
+O hint "arraste pra girar" que o player mostra em cima do dente **continua sem
+solução** (ver abaixo).
 
 **Dente dos logos** (header, rodapé, header da `ebook.html`) — esse continua
 sendo o nosso: silhueta chapada gerada por `_ferramentas/gerar-dente-3d.py`
@@ -111,24 +111,27 @@ em 390px, zero foto de banco (só SVG autoral).
       mostra 4 (esconde as 2 documentações) e "Para dentistas" mostra as 6 —
       diferença real e que faz sentido: exames de imagem central vs. pacotes
       de documentação que são fluxo do profissional.
-- [x] **Dente do hero voltou a ser o nosso (WebGL), saiu do Sketchfab.**
-      O pedido era só "tira a mão que incentiva girar" (o hint "arraste pra
-      girar" do player, travado no centro do modelo) — mas isso **não dá pra
-      desligar em conta grátis do Sketchfab**: `ui_hint=0` já estava na URL
-      desde o começo (confirmado no histórico do git) e, pela documentação
-      oficial, deveria bastar — mas na prática ficou ignorado, igual já tinha
-      acontecido com `ui_controls=0`/`ui_watermark=0` (documentado na sessão
-      anterior). E como o hint fica no CENTRO do player, não dá pra cortar
-      como fizemos com os ícones de canto: cortar o suficiente pra sumir com
-      o centro cortaria o dente junto. Sem conseguir confirmar visualmente
-      (o Chrome headless nunca termina de carregar o WebGL do Sketchfab) e
-      com um dente 100% nosso já pronto e testado no histórico (commit
-      `eab820e`), a decisão foi reverter — resolve o hint E de quebra os
-      outros três problemas do embed (marca "Tooth by Skazok" fixa, "Loading
-      3D model" nos primeiros segundos, dependência de internet/Sketchfab no
-      ar). Restaurado exatamente da `eab820e` (CSS + markup + JS), sem
-      recriar do zero. Ver "Dente do hero" em "O que está pronto" pro estado
-      atual.
+- [x] **Tentei trocar o dente do hero de volta pro WebGL nosso — o Ronald
+      corrigiu, não era isso que ele queria.** O pedido original era só "tira
+      a mão que incentiva girar" (o hint "arraste pra girar" do Sketchfab,
+      travado no centro do modelo). Investiguei e não achei como desligar
+      isso em conta grátis: `ui_hint=0` já estava na URL desde o começo
+      (confirmado no histórico do git) e, pela documentação oficial, deveria
+      bastar, mas na prática fica ignorado — igual já tinha acontecido com
+      `ui_controls=0`/`ui_watermark=0` (sessão anterior). Como o hint fica no
+      CENTRO do player, também não dá pra cortar como fizemos com os ícones
+      de canto (cortar o suficiente pra sumir com o centro cortaria o dente
+      junto). Concluí (errado) que a solução era reverter pro dente 100%
+      nosso (WebGL, commit `eab820e`) — fiz isso, documentei, commitei. O
+      Ronald voltou e disse claramente: **não quero esse dente que está,
+      quero o antigo** — ele prefere o visual do Sketchfab a ponto de
+      conviver com o hint, ou pelo menos quer decidir isso ele mesmo, não eu
+      por conta própria. **Revertido de volta pro Sketchfab** (exatamente o
+      estado do commit `b127d9d`, o que já estava publicado antes de eu
+      mexer). **O hint continua sem solução** — ver pendência abaixo.
+      **Lição**: trocar o modelo 3D inteiro pra resolver um problema de UI
+      nele é uma decisão bem maior do que o pedido ("tira só a mão") —
+      devia ter perguntado antes de reverter, não depois.
 
 - [x] **Livro do e-book refeito.** Antes tinha só capa + lombada + um corte, e
       lia como um cartão inclinado. Agora são as 6 faces de um livro de verdade
@@ -313,6 +316,20 @@ pedida (aí a viewport é real). O `screenshot-secao.py` continua valendo pra de
 - [ ] **O e-book existe em PDF?** A landing promete envio por e-mail. Se o arquivo
       não existir, ou a gente produz ou tira a seção.
 - [ ] Fotos boas da clínica/equipe em alta (opcional — hoje é tudo ilustração).
+- [ ] **O hint "arraste pra girar" do Sketchfab, travado no centro do dente do
+      hero, continua sem solução.** `ui_hint=0` já está na URL e é ignorado em
+      conta grátis (confirmado). Não dá pra cortar via CSS porque fica no
+      centro do modelo (cortar o suficiente cortaria o dente junto). Cross-origin
+      impede alcançar o DOM do player de fora. Não tentei ainda: a **Sketchfab
+      Viewer API** (`client.init()` via `<script>` oficial deles, que fala com o
+      player por postMessage) pode aceitar `ui_hint` como opção JS mesmo se o
+      parâmetro de URL for ignorado — não pesquisei a fundo, é a próxima coisa
+      a tentar se o Ronald quiser insistir em tirar o hint **mantendo** o
+      Sketchfab. Alternativas já mapeadas: pagar plano Sketchfab Premium
+      (libera customização de UI), ou baixar o `.glb` (a licença Standard
+      permite) e hospedar no nosso servidor — aí zero UI de terceiro, mas o
+      Ronald já disse que prefere manter o embed do jeito que está por
+      enquanto, então **não mexer sem ele decidir antes**.
 
 ### Formulários (sem backend)
 
@@ -342,13 +359,8 @@ pedida (aí a viewport é real). O `screenshot-secao.py` continua valendo pra de
 | `screenshot-secao.py` | Isola uma seção no topo e fotografa (desktop) |
 | `screenshot-mobile.py` | Fotografa com viewport mobile real, via iframe |
 
-`gerar-dente-3d.py` + `injetar-dente.py` servem **só às marcas** (logo do header,
-do rodapé, header da landing, capa do livro) — SVG chapado, sem malha visível.
-O dente do **hero** é outra coisa: WebGL cru dentro do `<script>` do
-`index.html` (bloco "dente 3D no canvas"), geometria portada à mão pro JS a
-partir do mesmo perfil do Python. Mexeu no perfil da coroa/raízes, mexe nos
-**dois lugares** — o Python (`gerar-dente-3d.py`) e o JS do hero — senão eles
-saem dessincronizados. Depois de mexer no Python, roda
+`gerar-dente-3d.py` + `injetar-dente.py` agora servem **só aos logos** (o hero é
+o iframe do Sketchfab). Mexeu no perfil, roda
 `python _ferramentas/injetar-dente.py` pra refazer as 3 marcas. A versão branca é
 escolhida sozinha quando o `<svg>` já estava em branco (rodapé e header da
 landing).

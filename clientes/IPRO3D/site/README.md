@@ -29,9 +29,9 @@ autoridade do responsável técnico visível.
 - Barra de progresso de scroll no topo
 - Header sticky que ganha fundo e sombra ao rolar
 - Reveal em cascata (IntersectionObserver, delay escalonado por irmão)
-- Dente 3D no hero: WebGL nosso (branco sólido, coroa + 4 raízes),
-  flutuando. Gira sozinho e dá pra girar arrastando (mouse e touch). Sem
-  dependência externa; sem WebGL cai no SVG de fallback.
+- Dente 3D no hero: embed do Sketchfab (modelo "Tooth", do Skazok),
+  flutuando. Gira sozinho e dá pra girar arrastando no desktop.
+  Precisa de internet — se o Sketchfab não carregar, o painel fica vazio.
 - 3 chips flutuantes no hero com boias em tempos diferentes
 - Grifo pêssego animado no título
 - Blobs de fundo em movimento lento
