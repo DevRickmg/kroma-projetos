@@ -63,6 +63,43 @@ em 390px, zero foto de banco (só SVG autoral).
 
 ## Resolvido nesta sessão
 
+- [x] **Dente não girava no touch do celular** (funcionava no desktop com
+      mouse). Causa: `.tooth-embed::after{position:absolute;inset:0}`,
+      adicionada numa sessão anterior pra evitar que o iframe do Sketchfab
+      "roubasse" o scroll vertical da página — só que uma capa cobrindo tudo,
+      com `pointer-events` padrão, bloqueia TAMBÉM o toque que giraria o
+      dente. Como só existia na media query mobile, o desktop nunca via o
+      problema. Removida: agora tocar e arrastar no dente gira ele (igual
+      no desktop); em troca, rolar a página precisa começar fora do painel
+      do dente — mesmo comportamento de qualquer iframe incorporado (mapa,
+      vídeo) no celular, não é regressão real.
+- [x] **Ícones "Documentação Invisalign", "Escaneamento intraoral" e "Sem
+      gesso" redesenhados de novo — a primeira tentativa não ficou clara.**
+      O Ronald não entendeu nenhum dos três (arcos finos abstratos liam
+      como curva genérica, não como dente/arcada). A "Panorâmica digital"
+      **funcionou** de primeira porque usa um ziguezague de cúspides bem
+      definido dentro de um contexto claro (retângulo de filme). Reaproveitei
+      **esse mesmo traço de ziguezague** como a "borda denteada" nos três
+      que falharam, em vez de inventar abstração nova:
+      - **Invisalign**: virou uma cúpula/bandeja com o ziguezague na borda
+        de baixo (a moldeira acompanhando o contorno dos dentes) + brilho
+        no topo.
+      - **Escaneamento intraoral**: uma "tela" com o ziguezague dentro (o
+        resultado do scan) + caneta de scanner apontando pra ela.
+      - **"Sem gesso"**: virou antes/depois — bandeja de moldagem (com
+        textura ondulada de massa) riscada com um X, seta, e do outro lado
+        a arcada com ziguezague + caneta escaneando.
+      **Lição pra próxima vez que desenhar ícone**: se um elemento abstrato
+      (arco, curva, forma solta) já funcionou em outro lugar do mesmo
+      conjunto, reaproveitar ele tem muito mais chance de ser entendido do
+      que inventar uma abstração nova pro mesmo conceito ("dente"/"arcada").
+      Também rolou um bug bobo no meio do processo: ao adaptar as coordenadas
+      do laboratório de teste (canvas largo, ícones lado a lado) pro viewBox
+      real do site (300×230, mais estreito), a bandeja riscada e a arcada
+      ficaram com os mesmos X/Y e se sobrepunham — só apareceu ao testar no
+      viewBox exato, não no laboratório. Testar sempre nas dimensões reais
+      de destino, não só numa versão ampliada.
+
 - [x] **Ícones dos 6 cards de exame + "Sem gesso" redesenhados, mais
       representativos.** Perguntei antes de mexer: os cards já tinham ilustração
       (não estavam em branco), a política do site é "zero foto de banco" desde a
