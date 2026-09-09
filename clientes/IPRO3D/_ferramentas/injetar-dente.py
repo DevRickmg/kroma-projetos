@@ -11,8 +11,11 @@ Duas saidas, do MESMO modelo 3D (`gerar-dente-3d.py`), na mesma pose:
   · `book-mark` (dente grande da capa do livro do e-book) — `build_flat()`,
     que ali aparece grande o bastante pra malha nao atrapalhar.
 
-O dente do hero NAO passa por aqui: e o embed do Sketchfab, direto no
-markup do `index.html`.
+O dente do hero (`<canvas id="tooth3d">`) tambem NAO passa por aqui — ele e
+WebGL puro, o bloco de JS dentro do `<script>` do `index.html`. Ja foi o embed
+do Sketchfab; voltou a ser o nosso porque o hint "arraste pra girar" deles nao
+da pra desligar em conta gratis e fica travado no centro do modelo (nao da
+pra cortar como os icones de canto sem cortar o dente junto).
 """
 import io, os, re, types
 

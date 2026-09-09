@@ -1,6 +1,6 @@
 # Onde paramos — IPRO3D
 
-Última sessão: **03/09/2026**
+Última sessão: **08/09/2026**
 Site: [`site/index.html`](site/index.html) · Landing do e-book: [`site/ebook.html`](site/ebook.html)
 
 ---
@@ -20,14 +20,20 @@ Site: [`site/index.html`](site/index.html) · Landing do e-book: [`site/ebook.ht
 
 ## O que está pronto
 
-**Estrutura**: topbar → header sticky → hero → prova (4 números) → IDOC (diagrama +
-acessos) → dois públicos → exames (com filtro) → zigzag → **e-book** → a clínica +
-Dr. Ronald → depoimentos (carrossel) → FAQ → localização + mapa → faixa de CTA → rodapé.
+**Estrutura**: header sticky → hero → prova (4 números) → IDOC (diagrama +
+acessos) → dois públicos → exames (com filtro real, ver sessão de hoje) → zigzag →
+**e-book** → a clínica + Dr. Ronald → depoimentos (carrossel) → FAQ → localização +
+mapa → faixa de CTA → rodapé. **Sem topbar** — a faixa azul escura com horário/
+endereço/telefone acima do header foi removida (o Ronald achou poluída); esses dados
+já apareciam no rodapé e na seção de localização, então nada se perdeu.
 
-**Dente do hero** — **embed do Sketchfab**: modelo "Tooth", do Skazok
-(`d2b3c8f5b4194f59b04b5e7542ccbe58`). Flutua sobre o painel roxo escuro, gira
-sozinho e dá pra girar arrastando. Fundo transparente (`transparent=1`), então
-o painel aparece atrás.
+**Dente do hero** — **WebGL nosso** (de novo — foi embed do Sketchfab por uma
+sessão inteira, revertido; ver "Resolvido nesta sessão" de hoje pro motivo).
+`<canvas id="tooth3d">`, branco sólido, coroa + 4 raízes, sombreamento por
+normal de vértice. Flutua sobre o painel roxo escuro, gira sozinho no sentido
+anti-horário e dá pra girar arrastando (mouse e touch). Sem WebGL cai no
+`<svg class="tooth-3d">` de fallback que já está no HTML. Zero dependência
+externa, zero internet necessária, zero UI de terceiro.
 
 **Dente dos logos** (header, rodapé, header da `ebook.html`) — esse continua
 sendo o nosso: silhueta chapada gerada por `_ferramentas/gerar-dente-3d.py`
@@ -56,6 +62,73 @@ em 390px, zero foto de banco (só SVG autoral).
 ---
 
 ## Resolvido nesta sessão
+
+- [x] **Topbar removida** (a faixa `#191652` com "Aberto hoje · horário ·
+      endereço · telefone" acima do header). Pedido do Ronald — achou poluído.
+      Endereço e telefone já apareciam no rodapé e na seção `#local`, nada foi
+      perdido. Removida do `index.html` (markup + CSS); em `ebook.html` só
+      existia CSS morto (o markup daquela página nunca usava `.topbar`), limpo
+      por consistência.
+
+- [x] **Bug do menu mobile: causa raiz encontrada.** O relato era "abre o menu
+      no celular e buga: nomes das páginas sem fundo, transparentes, por cima
+      do hero". Reproduzi forçando `.open` num `<nav id="nav">` isolado e medi
+      com `getBoundingClientRect`: o menu (`position:fixed;top:0;right:0;
+      bottom:0`) tinha só **128px de altura** — a altura do header, não da
+      tela. Causa: **`backdrop-filter` no `header` cria um novo "containing
+      block" pros descendentes `position:fixed`** (mesmo efeito de `transform`,
+      `filter`, `perspective`, `contain`, `will-change`). Como `#nav` é filho
+      do `header`, o `top/right/bottom:0` dele passou a ser relativo à CAIXA
+      DO HEADER, não ao viewport — por isso o menu ficava espremido nos
+      128px do header, com os links vazando por baixo sem fundo nenhum.
+      **Sintoma pra reconhecer da próxima vez**: `position:fixed` que deveria
+      cobrir a tela mas fica preso na altura de um ancestral — suspeitar de
+      `backdrop-filter`/`filter`/`transform`/`perspective` nesse ancestral.
+      **Correção**: o blur saiu do `header` e foi pra um `header::before`
+      (pseudo-elemento absoluto, `z-index:-1`, cobrindo o header por trás) —
+      o header em si não tem mais `backdrop-filter`, então não vira containing
+      block, e o efeito de vidro fosco continua igual visualmente.
+- [x] **Segundo bug do menu: arrastar o dedo ia pra uma área em branco na
+      lateral.** O menu fechado (`transform:translateX(102%)`, ainda
+      `position:fixed`) ficava tecnicamente fora da tela mas **ainda dentro
+      da área de rolagem da página** — `position:fixed` deslocado por
+      `transform` pode aumentar a área rollável do documento em vez de ser
+      ignorado (WebKit/Safari fazem isso; o `overflow-x:hidden` que já
+      existia só estava no `body`, e um `fixed` escapa da caixa do `body`
+      porque não é conteúdo dela). Corrigido: `overflow-x:hidden` também no
+      `html`, e o `nav` fechado ganhou `visibility:hidden` (só fica
+      `visible` com `.open`) — bônus de acessibilidade, sem isso dava pra
+      tabular pros links escondidos.
+- [x] **Filtro "Todos / Para pacientes / Para dentistas" não fazia nada
+      visível.** O JS estava certo (alterna `.hide` conforme `data-a` do
+      card) — o problema era o **dado**: 5 dos 6 exames tinham
+      `data-a="paciente dentista"`, então "Para dentistas" sempre mostrava os
+      6 (igual a "Todos") e "Para pacientes" só escondia 1. Corrigido: **
+      "Documentação Invisalign"** virou `data-a="dentista"` (é um pacote de
+      registros pro planejamento do alinhador — o paciente não pede isso por
+      conta própria, é encaminhado pelo ortodontista, igual "Documentação
+      ortodôntica" ao lado, que já estava certa). Agora "Para pacientes"
+      mostra 4 (esconde as 2 documentações) e "Para dentistas" mostra as 6 —
+      diferença real e que faz sentido: exames de imagem central vs. pacotes
+      de documentação que são fluxo do profissional.
+- [x] **Dente do hero voltou a ser o nosso (WebGL), saiu do Sketchfab.**
+      O pedido era só "tira a mão que incentiva girar" (o hint "arraste pra
+      girar" do player, travado no centro do modelo) — mas isso **não dá pra
+      desligar em conta grátis do Sketchfab**: `ui_hint=0` já estava na URL
+      desde o começo (confirmado no histórico do git) e, pela documentação
+      oficial, deveria bastar — mas na prática ficou ignorado, igual já tinha
+      acontecido com `ui_controls=0`/`ui_watermark=0` (documentado na sessão
+      anterior). E como o hint fica no CENTRO do player, não dá pra cortar
+      como fizemos com os ícones de canto: cortar o suficiente pra sumir com
+      o centro cortaria o dente junto. Sem conseguir confirmar visualmente
+      (o Chrome headless nunca termina de carregar o WebGL do Sketchfab) e
+      com um dente 100% nosso já pronto e testado no histórico (commit
+      `eab820e`), a decisão foi reverter — resolve o hint E de quebra os
+      outros três problemas do embed (marca "Tooth by Skazok" fixa, "Loading
+      3D model" nos primeiros segundos, dependência de internet/Sketchfab no
+      ar). Restaurado exatamente da `eab820e` (CSS + markup + JS), sem
+      recriar do zero. Ver "Dente do hero" em "O que está pronto" pro estado
+      atual.
 
 - [x] **Livro do e-book refeito.** Antes tinha só capa + lombada + um corte, e
       lia como um cartão inclinado. Agora são as 6 faces de um livro de verdade
@@ -263,14 +336,19 @@ pedida (aí a viewport é real). O `screenshot-secao.py` continua valendo pra de
 
 | Arquivo | Pra que serve |
 |---|---|
-| `gerar-dente-3d.py` | Gera a malha wireframe do dente |
-| `injetar-dente.py` | Regera a malha e injeta nos SVGs do site (hero + logos) |
+| `gerar-dente-3d.py` | Gera a malha sólida do dente (coroa + 4 raízes) em Python |
+| `injetar-dente.py` | Regera a malha e injeta nos SVGs das **marcas** (logos + capa do livro) |
 | `preview-dente.py` | Renderiza a silhueta SVG em 4 poses, pra conferir a forma |
 | `screenshot-secao.py` | Isola uma seção no topo e fotografa (desktop) |
 | `screenshot-mobile.py` | Fotografa com viewport mobile real, via iframe |
 
-`gerar-dente-3d.py` + `injetar-dente.py` agora servem **só aos logos** (o hero é
-o iframe do Sketchfab). Mexeu no perfil, roda
+`gerar-dente-3d.py` + `injetar-dente.py` servem **só às marcas** (logo do header,
+do rodapé, header da landing, capa do livro) — SVG chapado, sem malha visível.
+O dente do **hero** é outra coisa: WebGL cru dentro do `<script>` do
+`index.html` (bloco "dente 3D no canvas"), geometria portada à mão pro JS a
+partir do mesmo perfil do Python. Mexeu no perfil da coroa/raízes, mexe nos
+**dois lugares** — o Python (`gerar-dente-3d.py`) e o JS do hero — senão eles
+saem dessincronizados. Depois de mexer no Python, roda
 `python _ferramentas/injetar-dente.py` pra refazer as 3 marcas. A versão branca é
 escolhida sozinha quando o `<svg>` já estava em branco (rodapé e header da
 landing).
