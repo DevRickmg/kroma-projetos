@@ -8,7 +8,7 @@
 **Perfil:** Freelancer — organiza o trabalho por projeto/cliente
 **Atende clientes:** Sim. Cliente real: dono de negócio local ou prestador de serviço que sabe que está deixando dinheiro na mesa — perde vendas porque o site é bagunçado, demora a responder no WhatsApp e é invisível no Google. Tem caixa pra investir e quer tirar esse peso das costas rápido. Compra da Kroma porque foge de mensalidade de agência: valor único e fechado, projeto construído e entregue pronto, sem taxa surpresa nem recorrência.
 **Equipe:** Toca sozinho.
-**Ferramentas:**
+**Ferramentas:** GitHub (repo `DevRickmg/kroma-projetos`, privado) · Netlify (deploy do site da IPRO3D, conectado ao GitHub — push publica sozinho)
 **Principais entregas:**
 - Sites institucionais / landing pages
 - Robô de atendimento no WhatsApp (automação)

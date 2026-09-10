@@ -135,7 +135,10 @@ briefings, entregas, propostas e o conteúdo da própria marca.
 - `marketing/` — conteúdo da própria Kroma (Insta, portfolio, etc.)
 - `saidas/` — emails e documentos pontuais
 - `dados/` — arquivos a analisar
+- `scripts/` — utilitários Node/Python que as skills chamam (gerar imagem, postar em rede, render PNG). Vem vazia; cada skill diz como criar o seu
+- `templates/` — modelos de `CLAUDE.md`, design-guide e catálogos que o `/instalar` usa como base
 - `tarefas.md` — pipeline, prazos, próximos passos, lembretes da semana
+- `netlify.toml` — config de publicação do site da IPRO3D no Netlify (ver "Publicação")
 
 ## Quem sou
 
@@ -199,8 +202,23 @@ completa do que evitar.
 - O `mazzeoia/MazyOS` era só o template de origem, não é o repo de trabalho
 - `git push` já está liberado no modo automático (regra `Bash(git push:*)` em `.claude/settings.json`). O `git commit` ainda pede confirmação — liberar com `Bash(git commit:*)` se quiser o `/salvar` 100% automático
 
+## Publicação (Netlify)
+
+- O site da IPRO3D está publicado no **Netlify**, conectado direto ao repo do GitHub.
+  Todo `git push` na `main` dispara o deploy sozinho — não precisa de CLI nem de
+  credencial do Netlify na máquina.
+- O `netlify.toml` na raiz trava o `publish` em `clientes/IPRO3D/site/` — **sem
+  isso o Netlify serviria a raiz inteira do repo** (briefings, `dados-negocio.md`
+  com preços, `_memoria/`) como URL pública. Não mexer nesse `publish`.
+- O `netlify.toml` também manda `X-Robots-Tag: noindex` — o site é cópia do
+  `ipro3d.com.br`, que está no ar; indexar criaria conteúdo duplicado. Apagar esse
+  bloco só quando for pro domínio do Ronald.
+- É preview de prospecção, ainda em subdomínio `*.netlify.app`. Domínio próprio só
+  depois que o Ronald aprovar.
+
 ## Ferramentas conectadas
 
+- [x] **Netlify** — hospedagem/deploy do site da IPRO3D (via integração GitHub, sem MCP)
 - [ ] Notion
 - [ ] Gmail
 - [ ] Google Calendar
