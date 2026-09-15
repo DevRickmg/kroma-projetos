@@ -14,6 +14,7 @@ Cliente novo (ainda não fechado — material serve pra prospecção).
 
 - Análise do site atual (conteúdo, estrutura, SEO, visual) — `analise-site-atual.md`
 - Novo site (proposta de redesign) — `site/`
+- Página de link-in-bio pro Instagram — `site/bio.html`
 
 ## Onde salvar o que
 

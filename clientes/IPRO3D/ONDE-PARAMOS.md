@@ -1,7 +1,7 @@
 # Onde paramos — IPRO3D
 
-Última sessão: **08/09/2026**
-Site: [`site/index.html`](site/index.html) · Landing do e-book: [`site/ebook.html`](site/ebook.html)
+Última sessão: **14/09/2026**
+Site: [`site/index.html`](site/index.html) · Landing do e-book: [`site/ebook.html`](site/ebook.html) · Link-in-bio: [`site/bio.html`](site/bio.html)
 
 ---
 
@@ -62,6 +62,26 @@ em 390px, zero foto de banco (só SVG autoral).
 ---
 
 ## Resolvido nesta sessão
+
+- [x] **Página de link-in-bio criada** (`site/bio.html`) — pra usar no lugar
+      do Flowpage atual na bio do Instagram. Botões: agendar exame
+      (WhatsApp), acessar resultados (paciente), portal do dentista, como
+      chegar (Google Maps) e site completo; ícones de rede só no rodapé.
+      Entrada em cascata (fade-in-up escalonado), pulse no botão de agendar
+      e escala no hover/toque dos botões — sugestões do Ronald, todas
+      aplicadas. Publica sozinho pelo mesmo Netlify, em `/bio.html`.
+- [x] **Logo real da clínica no lugar do dente autoral** — o Ronald mandou os
+      dois arquivos oficiais que já usa em todo canto (Google Meu Negócio,
+      Instagram, Facebook): lockup horizontal (dente + texto) e o ícone
+      quadrado (dente em cima, fundo roxo). Trocado no header do site
+      (fundo claro — real) e na logo do `bio.html` (ícone quadrado).
+      Arquivos-fonte em `identidade/logo-horizontal.png` e
+      `identidade/logo-icone.jpg`, cópia servida em `site/img/`.
+      **Rodapé do site e header do `ebook.html` continuam com o dente
+      branco autoral** — são fundo `indigo-900` escuro, e o texto da logo
+      real é roxo/laranja (sumiria nesse fundo). Falta pedir pro Ronald uma
+      versão clara/branca da marca pra esses dois lugares (ver pendência
+      abaixo).
 
 - [x] **Dente não girava no touch do celular** (funcionava no desktop com
       mouse). Causa: `.tooth-embed::after{position:absolute;inset:0}`,
@@ -372,6 +392,11 @@ pedida (aí a viewport é real). O `screenshot-secao.py` continua valendo pra de
 
 ### Depende do Ronald (não dá pra resolver sozinho)
 
+- [ ] **Versão clara/branca da logo real**, pro rodapé do site e o header do
+      `ebook.html` (fundo `indigo-900` escuro). Hoje esses dois lugares
+      continuam com o dente autoral porque a logo real que o Ronald mandou
+      tem o texto em roxo/laranja — sumiria em fundo escuro sem uma versão
+      clara. Provavelmente já existe no kit de marca dele.
 - [ ] **Nota do Google: "4,9" está chutado** (`index.html` linha ~504). Trocar pela real ou tirar.
 - [ ] **Depoimentos são inventados** — Marina C., José S., Ana P., Rodrigo F.
       Substituir por reais ou puxar do Google.
@@ -448,7 +473,10 @@ Screenshot com WebGL precisa de `--enable-unsafe-swiftshader` no Chrome headless
 | `dados-negocio.md` | Dados da clínica + tabela de preços (não vai pro site) |
 | `site/index.html` | O site |
 | `site/ebook.html` | Landing do e-book |
+| `site/bio.html` | Link-in-bio (Instagram) |
 | `site/README.md` | Mapa Ruul→IPRO3D, animações e placeholders |
+| `site/img/` | Logos reais servidos no site (cópia de `identidade/`) |
+| `identidade/` | Arquivos-fonte da logo real da clínica (Ronald mandou) |
 
 ---
 
