@@ -168,6 +168,9 @@ passos como se estivesse fechado).
   Site atual desatualizado (parado em 2021). Pasta: `clientes/IPRO3D/`.
   Site novo pronto pra apresentar. Estado e pendências em
   `clientes/IPRO3D/ONDE-PARAMOS.md`.
+- **Alessandro Soares** (psicanalista clínico, @alessandro_psicanalista) —
+  primo do pai do Rick. Não tinha site. Site institucional criado do zero
+  pra apresentar. Pasta: `clientes/Alessandro-Soares/`.
 
 ### Clientes ativos
 

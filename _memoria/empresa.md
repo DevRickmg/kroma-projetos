@@ -29,5 +29,8 @@
   e dentista parceiro. Abordagem: redesign do site (o atual é WordPress de
   agência, parado desde 2021). Trabalho feito antes de fechar, pra usar como
   argumento de venda.
+- **Alessandro Soares** — psicanalista clínico, primo do pai do Rick
+  (@alessandro_psicanalista). Não tinha site, só Instagram. Site institucional
+  sofisticado criado do zero como peça de prospecção. Pasta: `clientes/Alessandro-Soares/`.
 
 **Ativos:** nenhum ainda.
