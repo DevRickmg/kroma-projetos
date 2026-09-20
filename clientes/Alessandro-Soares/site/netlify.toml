@@ -1,0 +1,16 @@
+# Netlify — publicação do site do Alessandro Soares
+#
+# Esse arquivo só é lido se, ao criar o site novo no Netlify, o "Base
+# directory" for configurado como "clientes/Alessandro-Soares/site".
+# Sem isso não tem build: é um HTML estático, o Netlify só serve a pasta.
+
+[build]
+  publish = "."
+
+# Peça de prospecção, ainda não fechou com o cliente. Deixar o Google
+# indexar antes da aprovação dele não faz sentido. Apagar este bloco
+# quando o Alessandro aprovar e for pro domínio dele.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
