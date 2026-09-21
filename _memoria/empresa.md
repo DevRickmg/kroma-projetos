@@ -8,7 +8,7 @@
 **Perfil:** Freelancer — organiza o trabalho por projeto/cliente
 **Atende clientes:** Sim. Cliente real: dono de negócio local ou prestador de serviço que sabe que está deixando dinheiro na mesa — perde vendas porque o site é bagunçado, demora a responder no WhatsApp e é invisível no Google. Tem caixa pra investir e quer tirar esse peso das costas rápido. Compra da Kroma porque foge de mensalidade de agência: valor único e fechado, projeto construído e entregue pronto, sem taxa surpresa nem recorrência.
 **Equipe:** Toca sozinho.
-**Ferramentas:** GitHub (repo `DevRickmg/kroma-projetos`, privado) · Netlify (deploy do site da IPRO3D, conectado ao GitHub — push publica sozinho)
+**Ferramentas:** GitHub (repo `DevRickmg/kroma-projetos`, privado) · Netlify (2 projetos conectados ao GitHub, cada um com seu próprio netlify.toml e Base directory — push na main publica os dois sozinhos: IPRO3D e Alessandro Soares)
 **Principais entregas:**
 - Sites institucionais / landing pages
 - Robô de atendimento no WhatsApp (automação)
@@ -31,6 +31,8 @@
   argumento de venda.
 - **Alessandro Soares** — psicanalista clínico, primo do pai do Rick
   (@alessandro_psicanalista). Não tinha site, só Instagram. Site institucional
-  sofisticado criado do zero como peça de prospecção. Pasta: `clientes/Alessandro-Soares/`.
+  sofisticado criado do zero como peça de prospecção, publicado no Netlify
+  (`monumental-manatee-03bcdb.netlify.app`) pra apresentar pra ele.
+  Pasta: `clientes/Alessandro-Soares/`.
 
 **Ativos:** nenhum ainda.

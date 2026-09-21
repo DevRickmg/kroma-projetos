@@ -169,8 +169,9 @@ passos como se estivesse fechado).
   Site novo pronto pra apresentar. Estado e pendências em
   `clientes/IPRO3D/ONDE-PARAMOS.md`.
 - **Alessandro Soares** (psicanalista clínico, @alessandro_psicanalista) —
-  primo do pai do Rick. Não tinha site. Site institucional criado do zero
-  pra apresentar. Pasta: `clientes/Alessandro-Soares/`.
+  primo do pai do Rick. Não tinha site. Site institucional criado do zero e
+  publicado no Netlify (`monumental-manatee-03bcdb.netlify.app`) pra
+  apresentar. Pasta: `clientes/Alessandro-Soares/`.
 
 ### Clientes ativos
 
@@ -203,7 +204,8 @@ completa do que evitar.
 - Repo oficial da Kroma: `https://github.com/DevRickmg/kroma-projetos` (private)
 - O git dessa máquina autentica como **DevRickmg**, mesmo que os commits apareçam assinados como `RickMS16` — as duas contas são do mesmo dono; usar sempre DevRickmg pra push
 - O `mazzeoia/MazyOS` era só o template de origem, não é o repo de trabalho
-- `git push` já está liberado no modo automático (regra `Bash(git push:*)` em `.claude/settings.json`). O `git commit` ainda pede confirmação — liberar com `Bash(git commit:*)` se quiser o `/salvar` 100% automático
+- `git push` já está liberado no modo automático (regra `Bash(git push:*)` em `.claude/settings.json`), mas o classificador de segurança do Auto Mode pode travar pushes com conteúdo pessoal de cliente (nome, contato) mesmo assim — nesse caso pedir pro usuário rodar `git push` direto no terminal dele. O `git commit` ainda pede confirmação — liberar com `Bash(git commit:*)` se quiser o `/salvar` 100% automático
+- A conta do Netlify conectada ao GitHub é a **RickMS16**, não a DevRickmg — ao criar um site novo no Netlify (Import an existing project), se ele não achar o `kroma-projetos`, trocar a conta no seletor de repositório pra DevRickmg
 
 ## Publicação (Netlify)
 
@@ -218,10 +220,20 @@ completa do que evitar.
   bloco só quando for pro domínio do Ronald.
 - É preview de prospecção, ainda em subdomínio `*.netlify.app`. Domínio próprio só
   depois que o Ronald aprovar.
+- O site do **Alessandro Soares** é um **segundo projeto Netlify**, separado do da
+  IPRO3D mas puxando do mesmo repo: `clientes/Alessandro-Soares/site/` tem seu
+  próprio `netlify.toml` (também com `noindex`, mesma lógica de prospecção), e
+  no painel do Netlify esse projeto foi criado com **Base directory** =
+  `clientes/Alessandro-Soares/site`. Publicado em
+  `monumental-manatee-03bcdb.netlify.app`. Esse é o padrão pra qualquer cliente
+  novo que precisar de preview: pasta com `netlify.toml` próprio + novo projeto
+  no painel apontando o Base directory pra ela — nunca mexer no `netlify.toml`
+  da raiz (esse é só da IPRO3D).
 
 ## Ferramentas conectadas
 
-- [x] **Netlify** — hospedagem/deploy do site da IPRO3D (via integração GitHub, sem MCP)
+- [x] **Netlify** — hospedagem/deploy dos sites da IPRO3D e do Alessandro Soares
+  (2 projetos separados na mesma conta, via integração GitHub, sem MCP)
 - [ ] Notion
 - [ ] Gmail
 - [ ] Google Calendar
