@@ -85,9 +85,8 @@ header{position:fixed;inset:0 0 auto 0;z-index:100;padding-block:1.35rem;transit
 header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
 header.solid{background:rgba(15,59,58,.86);backdrop-filter:blur(14px) saturate(140%);padding-block:.9rem;border-bottom:1px solid var(--line-on-dark)}
 .brand{display:flex;align-items:center;gap:.7rem}
-.brand svg{width:40px;height:40px;color:var(--gold);flex:none}
-.brand-txt{font-family:var(--sans);font-weight:800;font-size:1.1rem;letter-spacing:.02em;color:#fff;line-height:1.15}
-.brand-txt small{display:block;font-weight:600;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.brand-logo{height:54px;width:auto;display:block}
+.brand-logo-footer{height:64px}
 nav.main{display:flex;align-items:center;gap:2.1rem}
 nav.main a{font-size:.95rem;font-weight:600;color:var(--body-on-dark);position:relative;padding:.3rem 0}
 header .btn{padding:1.05rem 1.85rem;font-size:.98rem}
@@ -301,6 +300,7 @@ footer nav a:hover{color:var(--gold);transform:translateX(3px)}
   nav.main.open a{font-size:1.1rem;font-family:var(--serif);font-weight:500;padding:.8rem 0;width:100%;border-bottom:1px solid var(--line-on-dark)}
   .nav-cta{gap:.7rem}
   .nav-wa{display:none}
+  .brand-logo{height:42px}
 
   /* secoes nao sao mais forcadas a 100vh no celular: cada uma ocupa so o que precisa */
   section{min-height:0}
@@ -348,12 +348,7 @@ footer nav a:hover{color:var(--gold);transform:translateX(3px)}
 <header id="site-header">
   <div class="wrap">
     <a href="#top" class="brand" aria-label="Alessandro Soares">
-      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
-        <circle cx="24" cy="24" r="21.5" stroke-width="1"/>
-        <path d="M24 13v22M24 17l-6-6M24 17l6-6M24 21.5l-8-8M24 21.5l8-8M24 29l-6 6M24 29l6 6M24 33.5l-8 8M24 33.5l8 8"/>
-        <circle cx="24" cy="24" r="2.1" fill="currentColor" stroke="none"/>
-      </svg>
-      <span class="brand-txt">Alessandro Soares<small>Psicanalista Clínico</small></span>
+      <img src="img/logo.png" alt="Alessandro Soares — Psicanalista Clínico" class="brand-logo">
     </a>
     <nav class="main" id="main-nav">
       <a href="#sobre">Sobre</a>
@@ -614,12 +609,7 @@ footer nav a:hover{color:var(--gold);transform:translateX(3px)}
     <div class="f-top">
       <div>
         <div class="brand" style="margin-bottom:1.2rem">
-          <svg viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linecap="round" aria-hidden="true" width="34" height="34">
-            <circle cx="24" cy="24" r="21.5" stroke-width="1"/>
-            <path d="M24 13v22M24 17l-6-6M24 17l6-6M24 21.5l-8-8M24 21.5l8-8M24 29l-6 6M24 29l6 6M24 33.5l-8 8M24 33.5l8 8"/>
-            <circle cx="24" cy="24" r="2.1" fill="var(--gold)" stroke="none"/>
-          </svg>
-          <span class="brand-txt" style="color:#fff">Alessandro Soares<small>Psicanalista Clínico</small></span>
+          <img src="img/logo.png" alt="Alessandro Soares — Psicanalista Clínico" class="brand-logo brand-logo-footer">
         </div>
         <p style="max-width:32ch">Ajudo mulheres cansadas a se reconstruírem. Ansiedade, autoestima e feridas emocionais.</p>
       </div>
