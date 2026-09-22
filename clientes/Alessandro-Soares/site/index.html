@@ -112,7 +112,9 @@ nav.main a:hover::after{right:0}
   linear-gradient(180deg,var(--teal-950),var(--teal-900) 40%,var(--teal-900))}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>")}
-.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,6vw,4rem);align-items:center}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;grid-template-areas:"copy visual" "meta visual";column-gap:clamp(2.5rem,6vw,4rem);row-gap:0;align-items:center}
+.hero-copy{grid-area:copy}
+.hero-meta{grid-area:meta}
 .badge{display:inline-flex;align-items:center;gap:.55rem;padding:.55rem 1.05rem;border-radius:999px;background:rgba(247,243,236,.07);border:1px solid var(--line-on-dark);font-size:.8rem;font-weight:600;color:var(--body-on-dark);margin-bottom:1.6rem}
 .badge i{width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none;box-shadow:0 0 0 0 rgba(201,162,39,.6);animation:pulse-dot 2.4s infinite}
 @keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(201,162,39,.55)}70%{box-shadow:0 0 0 8px rgba(201,162,39,0)}100%{box-shadow:0 0 0 0 rgba(201,162,39,0)}}
@@ -126,7 +128,7 @@ nav.main a:hover::after{right:0}
 .hero .creds div{font-size:.78rem;letter-spacing:.06em;color:var(--muted-on-dark);border-left:1px solid var(--line-on-dark);padding-left:.9rem}
 .hero .creds b{display:block;color:#fff;font-family:var(--serif);font-size:1.15rem;font-weight:500;font-style:normal;margin-bottom:.15rem}
 
-.hero-visual{position:relative;justify-self:center;width:min(100%,460px)}
+.hero-visual{position:relative;justify-self:center;width:min(100%,460px);grid-area:visual}
 .glow-ring{position:absolute;inset:-14%;border-radius:50%;z-index:-1;
   background:conic-gradient(from 0deg,var(--gold),transparent 30%,transparent 70%,var(--gold));
   filter:blur(2px);opacity:.55;animation:spin 16s linear infinite}
@@ -283,8 +285,9 @@ footer nav a:hover{color:var(--gold);transform:translateX(3px)}
 
 /* ============ RESPONSIVE ============ */
 @media (max-width:980px){
-  .hero .wrap{grid-template-columns:1fr;text-align:left;row-gap:3rem}
+  .hero .wrap{grid-template-columns:1fr;grid-template-areas:"copy" "visual" "meta";text-align:left;row-gap:3rem}
   .hero-visual{margin-inline:auto;margin-top:1rem}
+  .chip-float{left:2%}
   .hero .marquee{margin-top:3rem}
   .sobre .wrap{grid-template-columns:1fr}
   .sobre-visual{max-width:340px;margin-inline:auto}
@@ -373,7 +376,7 @@ footer nav a:hover{color:var(--gold);transform:translateX(3px)}
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap">
-      <div>
+      <div class="hero-copy">
         <h1 class="rv">Ajudo mulheres cansadas a se <em>reconstruírem</em>.</h1>
         <p class="lead rv">Um espaço de escuta pra olhar pra dentro, compreender e transformar a dor que ninguém vê: ansiedade, autoestima e feridas emocionais.</p>
         <div class="ctas rv">
@@ -383,6 +386,9 @@ footer nav a:hover{color:var(--gold);transform:translateX(3px)}
           </a>
           <a href="#sobre" class="btn btn-ghost">Como funciona</a>
         </div>
+      </div>
+
+      <div class="hero-meta">
         <div class="badge rv hero-badge"><i></i> Atendimento por enquanto 100% online, presencial em breve</div>
         <div class="creds rv">
           <div><b>Psicanalista</b>Clínico</div>
@@ -394,7 +400,7 @@ footer nav a:hover{color:var(--gold);transform:translateX(3px)}
       <div class="hero-visual rv">
         <div class="glow-ring" aria-hidden="true"></div>
         <div class="photo-frame">
-          <img src="img/hero-palestra-4.jpg" alt="Alessandro Soares falando ao microfone em uma palestra" style="object-position:center 8%">
+          <img src="img/hero-palestra-5.jpg" alt="Alessandro Soares falando ao microfone em uma palestra" style="object-position:center 8%">
         </div>
         <div class="chip-float">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
