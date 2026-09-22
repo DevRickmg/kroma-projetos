@@ -32,7 +32,9 @@
 - **Alessandro Soares** — psicanalista clínico, primo do pai do Rick
   (@alessandro_psicanalista). Não tinha site, só Instagram. Site institucional
   sofisticado criado do zero como peça de prospecção, publicado no Netlify
-  (`monumental-manatee-03bcdb.netlify.app`) pra apresentar pra ele.
+  (`monumental-manatee-03bcdb.netlify.app`) pra apresentar pra ele. Já com a
+  identidade visual real dele aplicada: logo extraída do Instagram e fotos
+  reais de palestra/retrato de estúdio no lugar dos placeholders iniciais.
   Pasta: `clientes/Alessandro-Soares/`.
 
 **Ativos:** nenhum ainda.

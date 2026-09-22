@@ -15,6 +15,11 @@ Operação solo, entregando projetos fechados pra negócios locais. Foco em dest
 - Reduzir retrabalho: revisão estruturada antes de mandar pro cliente
 - Depois de destravado: aumentar volume de captação
 
+**Ferramenta disponível:** a máquina já tem Python 3.13 com OpenCV
+(contrib), GFPGAN e um modelo de upscale (LapSRN) instalados — usar pra
+tratar/upscalar fotos de baixa resolução que cliente manda pelo
+WhatsApp/Instagram (dor recorrente na produção de site).
+
 ## O que pode esperar
 
 Expansão de serviços, novos canais de captação, conteúdo de marca — tudo depois que a produção de site estiver sob controle.
