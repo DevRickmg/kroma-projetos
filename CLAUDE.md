@@ -171,7 +171,9 @@ passos como se estivesse fechado).
 - **Alessandro Soares** (psicanalista clínico, @alessandro_psicanalista) —
   primo do pai do Rick. Não tinha site. Site institucional criado do zero e
   publicado no Netlify (`monumental-manatee-03bcdb.netlify.app`) pra
-  apresentar. Pasta: `clientes/Alessandro-Soares/`.
+  apresentar. Pasta: `clientes/Alessandro-Soares/`. Proposta de automação em
+  3 pacotes (site + CRM + WhatsApp, Premium com Google Ads de 30 dias) em
+  `clientes/Alessandro-Soares/apresentacao-call/`.
 
 ### Clientes ativos
 
@@ -197,6 +199,7 @@ completa do que evitar.
 - Proposta de cliente fechado → `clientes/<Nome>/proposta.html`
 - Qualquer peça visual (site, proposta, carrossel) → ler `identidade/design-guide.md` antes
 - Nunca sugerir cobrança recorrente / mensalidade pro cliente final
+- Pagamento padrão em proposta: 50% pra começar o projeto, 50% na entrega, em qualquer opção (à vista ou parcelado)
 - Lembretes e tarefas da semana → `tarefas.md` (candidato a virar skill via `/mapear-rotinas`)
 
 ## Repositório (GitHub)

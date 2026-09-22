@@ -17,6 +17,9 @@ Direto, coloquial, sem rodeio. Frase curta e objetiva — fala como quem manda m
 - "alavancar"
 - "sinergia"
 - qualquer clichê de agência / marketês
+- travessão (—) em texto pra cliente — parece gerado por IA; trocar por ponto final ou vírgula
+- prometer acompanhamento/manutenção contínua em proposta — a linguagem tem que soar como entrega fechada, não suporte constante
+- expor pro cliente o cálculo ou valor do parcelado-à-parte com acréscimo — mostrar só à vista e parcelado sem juros como opções visíveis
 
 ## Estilo geral
 

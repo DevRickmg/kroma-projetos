@@ -35,6 +35,9 @@
   (`monumental-manatee-03bcdb.netlify.app`) pra apresentar pra ele. Já com a
   identidade visual real dele aplicada: logo extraída do Instagram e fotos
   reais de palestra/retrato de estúdio no lugar dos placeholders iniciais.
-  Pasta: `clientes/Alessandro-Soares/`.
+  Pasta: `clientes/Alessandro-Soares/`. Proposta de automação em 3 pacotes
+  (Essencial/Principal/Premium — site + CRM + WhatsApp, Premium com Google
+  Ads de 30 dias) pronta em `clientes/Alessandro-Soares/apresentacao-call/`,
+  em PDF paisagem (call) e versão mobile (leitura no celular).
 
 **Ativos:** nenhum ainda.

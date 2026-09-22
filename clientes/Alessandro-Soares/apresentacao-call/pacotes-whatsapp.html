@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Kroma Projetos · Pacotes CRM + WhatsApp · Alessandro Soares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0F12;
+    --card:#1A1D23;
+    --border:#262B33;
+    --border-cyan:rgba(0,229,255,0.2);
+    --text:#E0E0E0;
+    --white:#FFFFFF;
+    --muted:#8A94A6;
+    --magenta:#FF007F;
+    --cyan:#00E5FF;
+    --violet:#7B5CFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--bg); color:var(--text); font-family:'Inter',Arial,sans-serif;}
+  .page{
+    width:1600px; height:900px; position:relative; overflow:hidden;
+    background:var(--bg);
+    page-break-after:always;
+    display:flex; flex-direction:column;
+    padding:80px 100px;
+  }
+  .page:last-child{page-break-after:auto;}
+  .eyebrow{
+    font-size:15px; font-weight:800; letter-spacing:0.28em; text-transform:uppercase;
+    color:var(--cyan);
+  }
+  h1{
+    font-family:'Orbitron',Inter,sans-serif; font-weight:900;
+    color:var(--white); letter-spacing:-0.01em; line-height:1.05;
+  }
+  h2{
+    font-family:'Orbitron',Inter,sans-serif; font-weight:700;
+    color:var(--white); letter-spacing:-0.005em; line-height:1.1;
+  }
+  .rule{
+    width:70px; height:4px; border-radius:2px;
+    background:linear-gradient(90deg,var(--cyan),var(--magenta));
+    margin:24px 0;
+  }
+  .muted{color:var(--muted);}
+  .logo-row{display:flex; align-items:center; gap:14px;}
+  .logo-row svg{height:84px; width:auto;}
+  .footer{
+    position:absolute; bottom:56px; left:100px; right:100px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:14px; color:var(--muted); letter-spacing:0.04em;
+    border-top:1px solid var(--border); padding-top:24px;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:32px 32px;
+  }
+  .card h3{
+    font-size:22px; font-weight:800; color:var(--white); margin-bottom:6px;
+  }
+  .card p, .card li{ font-size:16px; line-height:1.5; color:var(--text); }
+  .card ul{ padding-left:20px; margin-top:14px; }
+  .card li{ margin-bottom:9px; }
+  .badge{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:44px; height:44px; border-radius:12px; margin-bottom:16px;
+    background:rgba(0,229,255,0.08); border:1px solid var(--border-cyan);
+    color:var(--cyan); font-size:20px; font-weight:800;
+  }
+  .price-tag{
+    font-family:'Orbitron',Inter,sans-serif; font-weight:900;
+    color:var(--white);
+  }
+  .cta{
+    display:inline-block; background:var(--magenta); color:var(--white);
+    font-weight:700; font-size:16px; padding:16px 34px; border-radius:12px;
+  }
+  .pill{
+    display:inline-block; padding:7px 16px; border-radius:100px;
+    border:1px solid var(--border-cyan); color:var(--cyan);
+    font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  }
+  .pill-muted{ border-color:var(--border); color:var(--muted); }
+  .pill-magenta{ border-color:rgba(255,0,127,0.4); color:var(--magenta); }
+  .tag-recomendado{
+    position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+    background:var(--magenta); color:var(--white); font-size:12px; font-weight:800;
+    letter-spacing:0.08em; text-transform:uppercase; padding:7px 18px; border-radius:100px;
+    white-space:nowrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 — CAPA -->
+<section class="page" style="justify-content:space-between;">
+  <div class="logo-row">
+    <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00E5FF"/><stop offset="55%" stop-color="#7B5CFF"/><stop offset="100%" stop-color="#FF007F"/>
+        </linearGradient>
+      </defs>
+      <g fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="120,30 197.94,75 197.94,165 120,210 42.06,165 42.06,75"/>
+        <path d="M120,30 L120,210 M197.94,75 L42.06,165 M42.06,75 L197.94,165"/>
+        <path d="M120,30 L197.94,165 M197.94,75 L120,210 M197.94,165 L42.06,165 M120,210 L42.06,75 M42.06,165 L120,30 M42.06,75 L197.94,75" opacity="0.85"/>
+      </g>
+      <text x="250" y="128" font-family="Inter" font-size="76" font-weight="700" letter-spacing="2">
+        <tspan fill="#00E5FF">K</tspan><tspan fill="#F5F7FA">ROMA</tspan>
+      </text>
+      <text x="252" y="168" font-family="Inter" font-size="27.5" font-weight="500" letter-spacing="17.5" fill="#8A94A6">PROJETOS</text>
+    </svg>
+  </div>
+
+  <div>
+    <div class="eyebrow">Proposta de automação · Alessandro Soares</div>
+    <div class="rule"></div>
+    <h1 style="font-size:54px; max-width:1250px;">O primeiro a responder<br>é quem fecha a consulta.<br><span style="color:var(--cyan);">Agora esse primeiro é você.</span></h1>
+    <p class="muted" style="font-size:20px; margin-top:28px; max-width:850px;">
+      Site, CRM e automação de WhatsApp pro seu consultório, em 3 níveis,
+      pra você escolher o pacote certo agora.
+    </p>
+  </div>
+
+  <div class="footer" style="position:static; border-top:none; padding-top:0;">
+    <span>Kroma Projetos · Tecnologia definitiva. Projetos fechados.</span>
+    <span>Alessandro Soares · Psicanálise clínica</span>
+  </div>
+</section>
+
+<!-- SLIDE 2 — O PROBLEMA -->
+<section class="page" style="justify-content:center;">
+  <div class="eyebrow">O que tá acontecendo hoje</div>
+  <div class="rule"></div>
+  <h2 style="font-size:42px; max-width:1150px; margin-bottom:34px;">Todo contato novo depende de você estar livre pra responder.</h2>
+  <p style="font-size:20px; max-width:920px; line-height:1.6; color:var(--text);">
+    Alguém manda mensagem no WhatsApp perguntando sobre atendimento.
+    Se pegar você em sessão, fora do consultório ou à noite, a resposta demora.
+    Quem procurou ajuda nesse momento não espera: fala com o próximo psicólogo
+    que aparecer. Cada contato parado é uma sessão que não aconteceu.
+  </p>
+  <div style="margin-top:44px; display:flex; gap:20px;">
+    <span class="pill">Resposta na hora</span>
+    <span class="pill">Sem depender de você online</span>
+    <span class="pill">Nenhum contato esquecido</span>
+  </div>
+</section>
+
+<!-- SLIDE 3 — OS 3 PACOTES -->
+<section class="page">
+  <div class="eyebrow">Escolha o nível</div>
+  <div class="rule"></div>
+  <h2 style="font-size:36px; margin-bottom:10px;">Três formas de resolver isso, do básico ao completo</h2>
+  <p class="muted" style="font-size:16px; margin-bottom:28px; max-width:1000px;">Os três pacotes incluem o site institucional que você já viu pronto. O que muda é o nível de automação. Ela vale pra todo contato que chegar no seu WhatsApp, venha de onde vier: site, Instagram, indicação ou anúncio.</p>
+
+  <div style="display:flex; gap:26px; flex:1; align-items:stretch;">
+    <div class="card" style="flex:1; display:flex; flex-direction:column;">
+      <span class="pill pill-muted" style="align-self:flex-start;">Essencial</span>
+      <div class="price-tag" style="font-size:34px; margin:16px 0 4px;">R$ 890</div>
+      <h3 style="font-size:18px; margin-top:10px;">Site + triagem no WhatsApp</h3>
+      <ul>
+        <li>Site institucional pronto</li>
+        <li>Bot recebe todo contato novo no WhatsApp</li>
+        <li>Pergunta motivo e disponibilidade, filtra curioso de paciente real</li>
+        <li>Avisa você só quando é sério</li>
+      </ul>
+    </div>
+
+    <div class="card" style="flex:1.08; display:flex; flex-direction:column; position:relative; border-color:rgba(255,0,127,0.4); background:linear-gradient(180deg,rgba(255,0,127,0.06),var(--card) 40%);">
+      <div class="tag-recomendado">Mais escolhido</div>
+      <span class="pill pill-magenta" style="align-self:flex-start;">Principal</span>
+      <div class="price-tag" style="font-size:38px; margin:16px 0 4px;">R$ 1.790</div>
+      <h3 style="font-size:18px; margin-top:10px;">Site + CRM + automação completa</h3>
+      <ul>
+        <li>Tudo do Essencial, mais:</li>
+        <li>CRM com histórico de cada paciente e lead</li>
+        <li>Agenda sessão e confirma horário sozinho</li>
+        <li>Tira dúvida sobre atendimento online sem sua intervenção</li>
+      </ul>
+    </div>
+
+    <div class="card" style="flex:1; display:flex; flex-direction:column;">
+      <span class="pill" style="align-self:flex-start;">Premium</span>
+      <div class="price-tag" style="font-size:34px; margin:16px 0 4px;">R$ 2.690</div>
+      <h3 style="font-size:18px; margin-top:10px;">Site + CRM + automação + Google Ads</h3>
+      <ul>
+        <li>Tudo do Principal, mais:</li>
+        <li>Relatório mensal: contatos, quantos viraram sessão</li>
+        <li>Reativação automática de quem sumiu no meio do caminho</li>
+        <li>Campanha no Google Ads rodando 30 dias, com a Kroma otimizando</li>
+        <li>Depois dos 30 dias, a estrutura de captação já fica pronta pra rodar</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4 — O INVESTIMENTO -->
+<section class="page">
+  <div class="eyebrow">O investimento</div>
+  <div class="rule"></div>
+  <h2 style="font-size:36px; margin-bottom:8px;">Valor fechado por pacote. Sem mensalidade, sem taxa depois.</h2>
+  <p class="muted" style="font-size:16px; margin-bottom:36px;">Um pacote, um valor, um projeto entregue pronto.</p>
+
+  <div style="display:flex; gap:24px; flex:1;">
+    <div class="card" style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <span class="pill pill-muted">Essencial</span>
+        <div class="price-tag" style="font-size:42px; margin:18px 0 2px;">R$ 890</div>
+        <p class="muted" style="font-size:14px;">à vista Pix, ou em até 5x de R$ 178 sem juros</p>
+      </div>
+    </div>
+    <div class="card" style="flex:1.08; display:flex; flex-direction:column; justify-content:space-between; border-color:rgba(255,0,127,0.4);">
+      <div>
+        <span class="pill pill-magenta">Principal</span>
+        <div class="price-tag" style="font-size:46px; margin:18px 0 2px;">R$ 1.790</div>
+        <p class="muted" style="font-size:14px;">à vista Pix, ou em até 5x de R$ 358 sem juros</p>
+      </div>
+    </div>
+    <div class="card" style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <span class="pill">Premium</span>
+        <div class="price-tag" style="font-size:42px; margin:18px 0 2px;">R$ 2.690</div>
+        <p class="muted" style="font-size:14px;">à vista Pix, ou em até 5x de R$ 538 sem juros</p>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:16px; color:var(--cyan); margin-top:28px; font-weight:600;">
+    Como funciona o pagamento: 50% pra começar o projeto, 50% na entrega, em qualquer pacote e opção acima.
+  </p>
+  <p style="font-size:14px; color:var(--muted); margin-top:10px;">
+    * Custos de terceiros pra rodar a automação (número de WhatsApp Business, API de mensagens, hospedagem do sistema e uso da IA) não entram nesse valor. São repassados no custo, sem markup da Kroma.
+  </p>
+  <p style="font-size:14px; color:var(--muted); margin-top:6px;">
+    * No Premium: a verba investida no Google Ads (o valor pago ao Google pra rodar o anúncio) é paga direto por você, à parte. A Kroma cuida só da configuração e otimização da campanha nos 30 dias.
+  </p>
+</section>
+
+<!-- SLIDE 5 — SEM MENSALIDADE -->
+<section class="page" style="justify-content:center;">
+  <div class="eyebrow">A diferença</div>
+  <div class="rule"></div>
+  <h2 style="font-size:42px; max-width:1100px; margin-bottom:40px;">Agência cobra mensalidade pra sempre. A Kroma entrega e acabou.</h2>
+  <div style="display:flex; gap:28px;">
+    <div class="card" style="flex:1; border-color:var(--border);">
+      <h3 style="color:var(--muted);">Modelo de agência</h3>
+      <ul>
+        <li>Mensalidade que nunca acaba</li>
+        <li>Você paga mesmo com pouco contato no mês</li>
+        <li>Suporte travado em plano</li>
+      </ul>
+    </div>
+    <div class="card" style="flex:1; border-color:rgba(255,0,127,0.35);">
+      <h3>Modelo Kroma</h3>
+      <ul>
+        <li>Paga uma vez, é seu pra sempre</li>
+        <li>Zero taxa recorrente</li>
+        <li>Sistema pronto, sem depender de ninguém</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6 — PRÓXIMO PASSO -->
+<section class="page" style="justify-content:center; align-items:flex-start;">
+  <div class="eyebrow">Próximo passo</div>
+  <div class="rule"></div>
+  <h2 style="font-size:46px; max-width:1000px; margin-bottom:40px;">Escolhendo o pacote hoje, a Kroma já entra em produção essa semana.</h2>
+  <span class="cta">Kroma Projetos</span>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Kroma Projetos · Pacotes CRM + WhatsApp · Alessandro Soares (mobile)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0F12;
+    --card:#1A1D23;
+    --border:#262B33;
+    --border-cyan:rgba(0,229,255,0.2);
+    --text:#E0E0E0;
+    --white:#FFFFFF;
+    --muted:#8A94A6;
+    --magenta:#FF007F;
+    --cyan:#00E5FF;
+    --violet:#7B5CFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--bg); color:var(--text); font-family:'Inter',Arial,sans-serif;}
+  body{ width:750px; }
+  .section{
+    padding:56px 44px;
+    border-bottom:1px solid var(--border);
+  }
+  .section:last-child{ border-bottom:none; }
+  .eyebrow{
+    font-size:17px; font-weight:800; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--cyan);
+  }
+  h1{
+    font-family:'Orbitron',Inter,sans-serif; font-weight:900;
+    color:var(--white); letter-spacing:-0.01em; line-height:1.14;
+    font-size:44px; margin-top:26px;
+  }
+  h2{
+    font-family:'Orbitron',Inter,sans-serif; font-weight:700;
+    color:var(--white); letter-spacing:-0.005em; line-height:1.18;
+    font-size:34px; margin-top:26px;
+  }
+  .rule{
+    width:64px; height:5px; border-radius:2px;
+    background:linear-gradient(90deg,var(--cyan),var(--magenta));
+    margin-top:20px;
+  }
+  .muted{color:var(--muted);}
+  p{ font-size:22px; line-height:1.62; margin-top:22px; }
+  .logo-row{display:flex; align-items:center;}
+  .logo-row svg{height:60px; width:auto;}
+  .pills{ display:flex; flex-wrap:wrap; gap:14px; margin-top:32px; }
+  .pill{
+    display:inline-block; padding:10px 20px; border-radius:100px;
+    border:1px solid var(--border-cyan); color:var(--cyan);
+    font-size:16px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+  }
+  .pill-muted{ border-color:var(--border); color:var(--muted); }
+  .pill-magenta{ border-color:rgba(255,0,127,0.4); color:var(--magenta); }
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:20px;
+    padding:36px 32px; margin-top:28px;
+  }
+  .card.highlight{ border-color:rgba(255,0,127,0.45); background:linear-gradient(180deg,rgba(255,0,127,0.07),var(--card) 45%); position:relative; }
+  .tag-recomendado{
+    display:inline-block;
+    background:var(--magenta); color:var(--white); font-size:15px; font-weight:800;
+    letter-spacing:0.06em; text-transform:uppercase; padding:8px 20px; border-radius:100px;
+    margin-bottom:20px;
+  }
+  .card h3{
+    font-size:27px; font-weight:800; color:var(--white); margin-top:14px;
+  }
+  .card ul{ padding-left:26px; margin-top:20px; }
+  .card li{ font-size:20px; line-height:1.55; margin-bottom:14px; }
+  .price-tag{
+    font-family:'Orbitron',Inter,sans-serif; font-weight:900;
+    color:var(--white); font-size:46px; margin-top:18px;
+  }
+  .price-note{ font-size:18px; color:var(--muted); margin-top:14px; }
+  .payment-line{
+    font-size:21px; color:var(--cyan); font-weight:600; line-height:1.5; margin-top:32px;
+  }
+  .footnote{ font-size:17px; color:var(--muted); line-height:1.55; margin-top:16px; }
+  .cta{
+    display:inline-block; background:var(--magenta); color:var(--white);
+    font-weight:700; font-size:20px; padding:20px 40px; border-radius:14px;
+    margin-top:34px;
+  }
+  .footer{
+    padding:44px; text-align:center;
+    font-size:16px; color:var(--muted); line-height:1.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="section">
+  <div class="logo-row">
+    <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00E5FF"/><stop offset="55%" stop-color="#7B5CFF"/><stop offset="100%" stop-color="#FF007F"/>
+        </linearGradient>
+      </defs>
+      <g fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="120,30 197.94,75 197.94,165 120,210 42.06,165 42.06,75"/>
+        <path d="M120,30 L120,210 M197.94,75 L42.06,165 M42.06,75 L197.94,165"/>
+        <path d="M120,30 L197.94,165 M197.94,75 L120,210 M197.94,165 L42.06,165 M120,210 L42.06,75 M42.06,165 L120,30 M42.06,75 L197.94,75" opacity="0.85"/>
+      </g>
+      <text x="250" y="128" font-family="Inter" font-size="76" font-weight="700" letter-spacing="2">
+        <tspan fill="#00E5FF">K</tspan><tspan fill="#F5F7FA">ROMA</tspan>
+      </text>
+      <text x="252" y="168" font-family="Inter" font-size="27.5" font-weight="500" letter-spacing="17.5" fill="#8A94A6">PROJETOS</text>
+    </svg>
+  </div>
+
+  <div class="eyebrow" style="margin-top:40px;">Proposta de automação · Alessandro Soares</div>
+  <div class="rule"></div>
+  <h1>O primeiro a responder é quem fecha a consulta. Agora esse primeiro é você.</h1>
+  <p class="muted">Site, CRM e automação de WhatsApp pro seu consultório, em 3 níveis, pra você escolher o pacote certo agora.</p>
+</section>
+
+<!-- PROBLEMA -->
+<section class="section">
+  <div class="eyebrow">O que tá acontecendo hoje</div>
+  <div class="rule"></div>
+  <h2>Todo contato novo depende de você estar livre pra responder.</h2>
+  <p>
+    Alguém manda mensagem no WhatsApp perguntando sobre atendimento.
+    Se pegar você em sessão, fora do consultório ou à noite, a resposta demora.
+    Quem procurou ajuda nesse momento não espera: fala com o próximo psicólogo
+    que aparecer. Cada contato parado é uma sessão que não aconteceu.
+  </p>
+  <div class="pills">
+    <span class="pill">Resposta na hora</span>
+    <span class="pill">Sem depender de você online</span>
+    <span class="pill">Nenhum contato esquecido</span>
+  </div>
+</section>
+
+<!-- PACOTES -->
+<section class="section">
+  <div class="eyebrow">Escolha o nível</div>
+  <div class="rule"></div>
+  <h2>Três formas de resolver isso, do básico ao completo</h2>
+  <p class="muted">Os três pacotes incluem o site institucional que você já viu pronto. O que muda é o nível de automação. Ela vale pra todo contato que chegar no seu WhatsApp, venha de onde vier: site, Instagram, indicação ou anúncio.</p>
+
+  <div class="card">
+    <span class="pill pill-muted">Essencial</span>
+    <div class="price-tag">R$ 890</div>
+    <p class="price-note" style="margin-top:6px;">à vista Pix, ou em até 5x de R$ 178 sem juros</p>
+    <h3>Site + triagem no WhatsApp</h3>
+    <ul>
+      <li>Site institucional pronto</li>
+      <li>Bot recebe todo contato novo no WhatsApp</li>
+      <li>Pergunta motivo e disponibilidade, filtra curioso de paciente real</li>
+      <li>Avisa você só quando é sério</li>
+    </ul>
+  </div>
+
+  <div class="card highlight">
+    <span class="tag-recomendado">Mais escolhido</span><br>
+    <span class="pill pill-magenta">Principal</span>
+    <div class="price-tag">R$ 1.790</div>
+    <p class="price-note" style="margin-top:6px;">à vista Pix, ou em até 5x de R$ 358 sem juros</p>
+    <h3>Site + CRM + automação completa</h3>
+    <ul>
+      <li>Tudo do Essencial, mais:</li>
+      <li>CRM com histórico de cada paciente e lead</li>
+      <li>Agenda sessão e confirma horário sozinho</li>
+      <li>Tira dúvida sobre atendimento online sem sua intervenção</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="pill">Premium</span>
+    <div class="price-tag">R$ 2.690</div>
+    <p class="price-note" style="margin-top:6px;">à vista Pix, ou em até 5x de R$ 538 sem juros</p>
+    <h3>Site + CRM + automação + Google Ads</h3>
+    <ul>
+      <li>Tudo do Principal, mais:</li>
+      <li>Relatório mensal: contatos, quantos viraram sessão</li>
+      <li>Reativação automática de quem sumiu no meio do caminho</li>
+      <li>Campanha no Google Ads rodando 30 dias, com a Kroma otimizando</li>
+      <li>Depois dos 30 dias, a estrutura de captação já fica pronta pra rodar</li>
+    </ul>
+  </div>
+
+  <p class="payment-line">Como funciona o pagamento: 50% pra começar o projeto, 50% na entrega, em qualquer pacote e opção acima.</p>
+  <p class="footnote">* Custos de terceiros pra rodar a automação (número de WhatsApp Business, API de mensagens, hospedagem do sistema e uso da IA) não entram nesse valor. São repassados no custo, sem markup da Kroma.</p>
+  <p class="footnote">* No Premium: a verba investida no Google Ads (o valor pago ao Google pra rodar o anúncio) é paga direto por você, à parte. A Kroma cuida só da configuração e otimização da campanha nos 30 dias.</p>
+</section>
+
+<!-- DIFERENÇA -->
+<section class="section">
+  <div class="eyebrow">A diferença</div>
+  <div class="rule"></div>
+  <h2>Agência cobra mensalidade pra sempre. A Kroma entrega e acabou.</h2>
+
+  <div class="card">
+    <h3 class="muted">Modelo de agência</h3>
+    <ul>
+      <li>Mensalidade que nunca acaba</li>
+      <li>Você paga mesmo com pouco contato no mês</li>
+      <li>Suporte travado em plano</li>
+    </ul>
+  </div>
+  <div class="card" style="border-color:rgba(255,0,127,0.35);">
+    <h3>Modelo Kroma</h3>
+    <ul>
+      <li>Paga uma vez, é seu pra sempre</li>
+      <li>Zero taxa recorrente</li>
+      <li>Sistema pronto, sem depender de ninguém</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FECHO -->
+<section class="section">
+  <div class="eyebrow">Próximo passo</div>
+  <div class="rule"></div>
+  <h2>Escolhendo o pacote hoje, a Kroma já entra em produção essa semana.</h2>
+  <span class="cta">Kroma Projetos</span>
+</section>
+
+<div class="footer">
+  Kroma Projetos · Tecnologia definitiva. Projetos fechados.<br>
+  Alessandro Soares · Psicanálise clínica
+</div>
+
+</body>
+</html>

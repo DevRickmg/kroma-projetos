@@ -61,7 +61,8 @@ Tech premium, fundo escuro, acentos neon controlados. Referência: painel de sof
 - **Preview de referência:** `identidade/logo-preview.png`
 - **A marca:** hexágono "cristal" low-poly com gradiente ciano→magenta. Remete a "kroma" (cor) e a estrutura/engenharia.
 - **Onde usar:** slide final do carrossel (CTA), header de propostas, slides de apresentação, favicon (ícone), header de site
-- **Tamanho sugerido:** largura entre 120-200px nos HTMLs. Abaixo de ~64px usar `logo-icon.svg` (o lockup com texto fica ilegível).
+- **Tamanho sugerido:** largura entre 120-200px nos HTMLs (site, header). Abaixo de ~64px usar `logo-icon.svg` (o lockup com texto fica ilegível).
+- **Em capa de slide/apresentação (PDF de venda):** 120-200px fica pequeno demais — usar algo em torno de 250-280px de largura (altura ~80-85px no lockup padrão). Validado na proposta do Alessandro Soares, que pediu aumento duas vezes até chegar nesse tamanho.
 - **Nota:** o wordmark está como texto vivo (fonte Inter) — para uso impresso ou onde a fonte não carrega, converter o texto em contornos.
 
 ---
