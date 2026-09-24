@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Identidade Kroma: grafite + ciano estrutural + magenta só em CTA */
+@theme {
+  --color-bg: #0d0f12;
+  --color-card: #1a1d23;
+  --color-card2: #20242b;
+  --color-hover: #252a32;
+  --color-line: #262b33;
+  --color-line2: #323843;
+  --color-ink: #e0e0e0;
+  --color-strong: #ffffff;
+  --color-muted: #8b93a1;
+  --color-faint: #5c6370;
+  --color-cyan: #00e5ff;
+  --color-magenta: #ff007f;
+  --color-violet: #7b5cff;
+  --color-danger: #f0445a;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-orbitron), var(--font-inter), ui-sans-serif, sans-serif;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgb(0 229 255 / 0.25);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line2) transparent;
+}
+
+input,
+select,
+textarea {
+  color-scheme: dark;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(0 229 255 / 0.6);
+  outline-offset: 2px;
+}
+
+/* slider no padrão da marca */
+input[type="range"] {
+  accent-color: var(--color-cyan);
+}
+
+/* Leaflet no tema escuro (os tiles continuam claros, só o controle) */
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: #1a1d23;
+  border-radius: 12px;
+}
+.leaflet-control-zoom a {
+  background: #1a1d23 !important;
+  color: #e0e0e0 !important;
+  border-color: #262b33 !important;
+}
+.leaflet-control-attribution {
+  background: rgb(13 15 18 / 0.75) !important;
+  color: #8b93a1 !important;
+}
+.leaflet-control-attribution a {
+  color: #00e5ff !important;
+}
+
+.tip {
+  position: relative;
+}
+.tip > .tip-body {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.12s, transform 0.12s;
+}
+.tip:hover > .tip-body,
+.tip:focus-within > .tip-body {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.pulse-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
